@@ -1,0 +1,14 @@
+.main {
+	background-image: url(../assets/images/background.jpg);
+	
+}
+
+:root {
+	--blue: #06113c;
+	--white: #ffffff;
+	--red: #eb5353;
+	--green: hsl(112, 85%, 20%);
+	--green-1: #e3fcbf;
+	--yellow: #d6b314;
+	--orange: #FF884B;
+}

@@ -1,0 +1,66 @@
+.feature__subtitle {
+    color: var(--orange);
+}
+
+.feature__title span {
+    color: var(--orange);
+}
+
+.feature__text {
+    color: var(--blue);
+}
+
+.feature__item p {
+    color: var(--blue);
+}
+
+.food__category {
+    background: var(--green-1);
+    text-align: center;
+    margin-top: 30px;
+    padding: 20px 0px;
+    border-radius: 8px;
+}
+
+.food__category button {
+    border: none;
+    outline:none;
+    padding: 7px 20px;
+    background: transparent;
+}
+
+.food__category button img {
+    width: 20px;
+    height: 20px;
+}
+
+.foodBtnActive {
+    background-color: var(--red)!important;
+    border-radius: 5px;
+    color: var(--white);
+}
+
+.quality-foods {
+    padding:100px 0px;
+}
+
+.quality-foods .quality {
+    width:60%;
+}
+.quality__food-title{
+    text-transform: uppercase;
+}
+
+.quality__food-title span{
+    color: var(--red);
+}
+
+.quality__food-desc{
+    color: var(--blue);
+    line-height:28px
+}
+
+.choose__us-title {
+    font-weight: 600;
+    color: var(--green);
+}

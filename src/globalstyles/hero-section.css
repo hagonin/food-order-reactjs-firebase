@@ -1,0 +1,81 @@
+.hero__content {
+	padding-top: 70px;
+	text-align: center;
+}
+
+.hero__content p {
+	color: var(--blue);
+}
+
+.hero__content > h1 ~ p {
+}
+
+.hero__title {
+	font-size: 2.5rem;
+	line-height: 55px;
+}
+
+.hero__title span {
+	color: var(--green);
+}
+
+.hero__btns button {
+	border: none;
+	outline: none;
+	padding: 8px 25px;
+	border-radius: 20px;
+	cursor: pointer;
+}
+
+.order__btn {
+	background: var(--green);
+	color: var(--white);
+	transition: 0.3s;
+}
+
+.order__btn:hover {
+	background: var(--green-1);
+	color: var(--blue);
+}
+
+.all__foods-btn {
+	background: transparent;
+	border: 1px solid var(--blue) !important;
+}
+
+.all__foods-btn:hover {
+	background: var(--green);
+	color: var(--white);
+}
+
+.hero__img {
+	margin-top: 2rem;
+}
+
+@media only screen and (max-width: 768px) {
+	.hero__content p {
+		font-size: 0.8rem;
+		line-height: 25px;
+	}
+
+	.hero__title {
+		font-size: 1.5rem;
+		line-height: 40px;
+	}
+
+	.hero__btns button {
+		padding: 5px 15px;
+		font-size: 0.7rem;
+	}
+}
+
+@media only screen and (max-width: 576px) {
+	.hero__btns {
+		justify-content: center;
+	}
+
+	.hero__btns button {
+		padding: 7px 17px;
+		font-size: 0.8em;
+	}
+}

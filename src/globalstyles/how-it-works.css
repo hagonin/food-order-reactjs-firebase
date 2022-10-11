@@ -1,0 +1,16 @@
+.howitworks__item {
+    padding: 30px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.4s;
+}
+
+.howitworks__item p {
+    text-transform:uppercase;
+    font-weight: 600;
+    font-size: .9rem;
+}
+.howitworks__img{
+    width: 50px;
+    height: 70px;
+}
