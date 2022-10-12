@@ -1,16 +1,20 @@
+import { useSelector } from 'react-redux';
+
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
-import Router from '../../routes/Router';
+import Carts from '../UI/cart/Cart'
 
-import '../../globalstyles/main.css'
+import '../../globalstyles/main.css';
 
-export default function Layout() {
+export default function Layout({ children }) {
+	 const showCart = useSelector((state) => state.cartUi.cartIsVisible);
 	return (
-		<div>
+		<div className="main">
 			<Header />
-			<div className='main'>
-				<Router />
-			</div>
+			{showCart && <Carts />}
+
+			<main>{children}</main>
+
 			<Footer />
 		</div>
 	);

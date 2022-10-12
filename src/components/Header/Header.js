@@ -1,8 +1,9 @@
-import { useRef } from 'react';
+import { useEffect, useRef } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { NavLink, Link } from 'react-router-dom';
 import { Container } from 'reactstrap';
 import logo from '../../assets/images/logo.png';
-
+import { cartUiActions } from '../../store/shopping-cart/cartUiSlice';
 import '../../globalstyles/header.css';
 
 const nav_link = [
@@ -14,12 +15,32 @@ const nav_link = [
 
 export default function Header() {
 	const navbarRef = useRef(null);
-	console.log(navbarRef.current)
+	const headerRef = useRef(null);
+
 	const toggleNavbar = () => navbarRef.current.classList.toggle('show__navbar');
-  console.log(toggleNavbar);
+
+	const totalQuantity = useSelector((state) => state.cart.totalQuantity);
+
+	const dispatch = useDispatch()
+	const toggleCart = () => { dispatch(cartUiActions.toggle())}
+
+	useEffect(() => {
+		window.addEventListener('scroll', () => {
+			if (
+				document.body.scrollTop > 80 ||
+				document.documentElement.scrollTop > 80
+			) {
+				headerRef.current.classList.add('header__shrink');
+			} else {
+				headerRef.current.classList.remove('header__shrink');
+			}
+		});
+
+		// return () => window.removeEventListener('scroll');
+	}, []);
 
 	return (
-		<header className="header">
+		<header className="header" ref={headerRef}>
 			<Container>
 				<div className="nav__wrapper d-flex align-items-center justify-content-between">
 					<div className="logo">
@@ -46,9 +67,9 @@ export default function Header() {
 
 					{/* ======= nav right =======  */}
 					<div className="nav__right d-flex align-items-center gap-3">
-						<span className="cart__icon">
+						<span className="cart__icon" onClick={toggleCart}>
 							<i className="ri-shopping-basket-fill"></i>
-							<span className="cart__badge">5</span>
+							<span className="cart__badge">{totalQuantity}</span>
 						</span>
 						<span className="user">
 							<Link to="/login">

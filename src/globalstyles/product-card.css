@@ -1,45 +1,94 @@
 .product__item {
-    border: 1px solid var(--green);
-    text-align: center;
-    padding: 30px;
-    cursor: pointer;
+	border: 1px solid var(--green);
+	text-align: center;
+	padding: 30px;
+	cursor: pointer;
 }
 
 .product__img {
-    margin-bottom: 20px;
-    transition: 0.4s;
+	margin-bottom: 20px;
+	transition: 0.4s;
 }
- .product__img:hover {
-    transform: scale(1.2);
- }
+.product__img:hover {
+	transform: scale(1.2);
+}
 
- .product__img img {
-    object-fit: cover;
-    width: 250px;
-    height: 200px;
- }
+.product__img img {
+	object-fit: cover;
+	width: 200px;
+	height: 200px;
+}
 
- .product__content h5 a {
-    color: var(--blue);
-    font-size: 1rem;
- }
+.product__content h5 a {
+	color: var(--blue);
+	font-size: 1rem;
+}
 
- .product__content h5 {
-    margin-bottom: 30px;
- }
+.product__content h5 {
+	margin-bottom: 30px;
+	font-weight: 600;
+}
 
- .product__price {
-    font-weight: 600;
-    font-size: 1.2rem;
-    color: var(--red);
- }
+.product__price {
+	font-weight: 600;
+	font-size: 1.2rem;
+	color: var(--red);
+}
 
- .addToCart__btn{
-    border:none;
-    padding: 7px 25px;
-    background: var(--green);
-    color: var(--white);
-    font-weight: 600;
-    border-radius: 5px;
-    font-size: 0.9rem;
- }
+.addToCart__btn {
+	border: none;
+	padding: 7px 20px;
+	background: var(--green);
+	color: var(--white);
+	font-weight: 600;
+	border-radius: 5px;
+	font-size: 0.9rem;
+}
+
+@media only screen and (max-width: 1200px) {
+	.product__img img {
+		object-fit: cover;
+		width: 160px;
+		height: 160px;
+	}
+
+   .addToCart__btn {
+		font-size: 0.7rem;
+		padding: 10px 11px;
+	}
+}
+
+@media only screen and (max-width: 992px) {
+	.addToCart__btn {
+		font-size: 0.7rem;
+		padding: 10px 11px;
+	}
+}
+
+@media only screen and (max-width: 768px) {
+	.product__img img {
+		object-fit: cover;
+		width: 120px;
+		height: 120px;
+	}
+
+	.addToCart__btn {
+		font-size: 0.7rem;
+		padding: 10px 11px;
+	}
+}
+
+@media only screen and (max-width: 576px) {
+	.food__category button {
+		padding: 0px 6px;
+	}
+
+	.addToCart__btn {
+		font-size: 0.5rem;
+		padding: 6px 8px;
+	}
+
+	.product__price {
+		font-size: 0.9rem;
+	}
+}

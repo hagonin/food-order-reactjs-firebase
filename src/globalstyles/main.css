@@ -5,10 +5,16 @@
 
 :root {
 	--blue: #06113c;
+	--grey: #6d6e70;
 	--white: #ffffff;
 	--red: #eb5353;
 	--green: hsl(112, 85%, 20%);
 	--green-1: #e3fcbf;
 	--yellow: #d6b314;
 	--orange: #FF884B;
+
+	--btn-cart: #fde4e4;
+
+	--subtitle-font: 'Concert One', cursive;
+	--subtitle-testimonial: 'Palanquin Dark', sans-serif;
 }

@@ -34,7 +34,8 @@
 }
 
 .order__btn:hover {
-	background: var(--green-1);
+	background: var(--white);
+	outline: auto;
 	color: var(--blue);
 }
 
@@ -48,8 +49,24 @@
 	color: var(--white);
 }
 
+.all__foods-btn a:hover {
+	color: var(--white);
+}
+
 .hero__img {
 	margin-top: 2rem;
+}
+
+@media only screen and (max-width: 991px) {
+	.hero__img {
+		display: flex;
+		align-items: center;
+	}
+
+	.hero__title {
+		font-size: 1.5rem;
+		line-height: 35px;
+	}
 }
 
 @media only screen and (max-width: 768px) {

@@ -1,5 +1,5 @@
 /* google fonts  */
-@import url('https://fonts.googleapis.com/css2?family=Luckiest+Guy&family=Poppins:wght@400;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Luckiest+Guy&family=Poppins:wght@400;600&family=Concert+One&family=Palanquin+Dark:wght@600&display=swap');
 
 /* reset default style */
 * {
@@ -13,7 +13,6 @@
 body {
 	background: #f9f9f9;
 	font-family: 'Poppins', sans-serif;	
-	height: 150rem;
 }
 
 h1,

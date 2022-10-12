@@ -9,9 +9,9 @@ import HowItWorks from '../components/UI/how-it-works/HowItWorks';
 import '../globalstyles/hero-section.css';
 import '../globalstyles/home.css';
 
-import featureImg1 from '../assets/images/fast-delivery.png';
-import featureImg2 from '../assets/images/super-dinner.png';
-import featureImg3 from '../assets/images/hot.png';
+import featureImg1 from '../assets/images/freshveg.png';
+import featureImg2 from '../assets/images/best-recipe.png';
+import featureImg3 from '../assets/images/vegan.png';
 
 import products from '../assets/fake-API/product';
 import ProductCard from '../components/UI/products/ProductCard';
@@ -20,24 +20,25 @@ import foodCategoryImg02 from '../assets/images/meat.png';
 import foodCategoryImg03 from '../assets/images/pasta.png';
 
 import quality from '../assets/images/quality-food.jpg';
-import network from '../assets/images/network.png'
+import network from '../assets/images/social-network.jpg';
+import TestimonialSlider from '../components/UI/slider/TestimonialSlider';
 
 const featureData = [
 	{
-		title: 'Quick Delivery',
+		title: 'Fresh Ingredients',
 		imgUrl: featureImg1,
-		desc: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Minus, doloremque.',
+		desc: 'Sed egestas, ante vulputa eros pede vitae luctus metus augue.',
 	},
 
 	{
-		title: 'Super Dine In',
+		title: 'Best recipe',
 		imgUrl: featureImg2,
-		desc: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Minus, doloremque.',
+		desc: 'Sed egestas, ante vulputa eros pede vitae luctus metus augue.',
 	},
 	{
-		title: 'Easy Pick Up',
+		title: 'Vegan Menu',
 		imgUrl: featureImg3,
-		desc: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Minus, doloremque.',
+		desc: 'Sed egestas, ante vulputa eros pede vitae luctus metus augue.',
 	},
 ];
 
@@ -45,13 +46,13 @@ export default function Home() {
 	const [category, setCategory] = useState('ALL');
 	const [allProducts, setAllProducts] = useState(products);
 
-  const [preferredSalad, setPreferredSalad] = useState([]);
+	const [preferredSalad, setPreferredSalad] = useState([]);
 
-  useEffect(() => {
-    const filteredSalad = products.filter(item => item.category === "Salad")
-    const sliceSalad = filteredSalad.slice(0,4)
-    setPreferredSalad(sliceSalad)
-  }, []);
+	useEffect(() => {
+		const filteredSalad = products.filter((item) => item.category === 'Salad');
+		const sliceSalad = filteredSalad.slice(0, 4);
+		setPreferredSalad(sliceSalad);
+	}, []);
 
 	useEffect(() => {
 		if (category === 'ALL') {
@@ -126,17 +127,19 @@ export default function Home() {
 								we will <span>take care</span>
 							</h2>
 							<p className="mb-1 mt-4 feature__text">
-								Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolor,
-								officiis?
+								Enjoy delicious, satisfying helthy meals you can make with
+								everyday ingredients - no weighing, no measuring and no counting
+								calories. We will deliver you an amazing meal of your life.
 							</p>
-							<p className="feature__text">
-								Lorem ipsum dolor sit amet consectetur adipisicing elit.
-								Aperiam, eius.
+							<p className="feature__text mt-3">
+								The best healthy food let you order whatever you want to eat
+								with just the click of a button. No need to dine in or even
+								drive anywhere to pick up the meal.
 							</p>
 						</Col>
 						{featureData.map((item, index) => (
-							<Col lg="4" md="6" sx="6" key={index} className="mt-5">
-								<div className="feature__item text-center px-5 py-3">
+							<Col lg="4" md="6" sm="12" key={index} className="mt-5">
+								<div className="feature__item text-center">
 									<img
 										src={item.imgUrl}
 										alt="feature-img"
@@ -153,7 +156,7 @@ export default function Home() {
 			<section>
 				<Container>
 					<Row>
-						<Col lg="12" className="text-center">
+						<Col lg="12" className="text-center menu">
 							<h2>Our Menu</h2>
 						</Col>
 						<Col lg="12">
@@ -260,7 +263,7 @@ export default function Home() {
 					</Row>
 				</Container>
 			</section>
-			<section className="pt-0">
+			<section className="py-5">
 				<Container>
 					<Row>
 						<Col lg="12" className="text-center mb-5 ">
@@ -276,26 +279,26 @@ export default function Home() {
 				</Container>
 			</section>
 			<section>
-				<Container>
+				<Container className="mt-5">
 					<Row>
 						<Col lg="6" md="6">
 							<div className="testimonial ">
-								<h5 className="testimonial__subtitle mb-4">Testimonial</h5>
+								<p className="testimonial__subtitle">"</p>
 								<h2 className="testimonial__title mb-4">
-									What our <span>customers</span> are saying
+									What our <span>food lovers</span> said
 								</h2>
 								<p className="testimonial__desc">
-									Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-									Distinctio quasi qui minus quos sit perspiciatis inventore
-									quis provident placeat fugiat!
+									Ordering food online is quick and easy. It really is that
+									simple. Quite obviously, you could select and order your meals
+									while relaxing on the couch in your pyjamas, if you really
+									wanted to.
 								</p>
-
-								{/* <TestimonialSlider /> */}
+								<TestimonialSlider />
 							</div>
 						</Col>
 
 						<Col lg="6" md="6">
-							<img src={network} alt="testimonial-img" className="w-100" />
+							<img src={network} alt="testimonial-img" className="testimonial__img" />
 						</Col>
 					</Row>
 				</Container>
