@@ -15,7 +15,7 @@
   width: 400px;
   height: 100%;
   background: var(--white);
-  z-index: 999999;
+  z-index: 99999;
 }
 
 .cart__close {
