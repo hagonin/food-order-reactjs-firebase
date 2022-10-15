@@ -1,51 +1,49 @@
-import { useRef } from 'react';
+import { useEffect, useRef } from 'react';
+import { Container, Row, Col } from 'reactstrap';
+import { Link, useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+
 import Title from '../components/Title/Title';
 import CommonSection from '../components/UI/common-section/CommonSection';
-import { Container, Row, Col } from 'reactstrap';
-import { Link } from 'react-router-dom';
+import { reset, login } from '../store/auth/authSlice';
+import Spinner from '../components/Spinner/Spinner';
 
 const Login = () => {
 	const loginNameRef = useRef();
 	const loginPasswordRef = useRef();
 
+	const navigate = useNavigate();
+	const dispatch = useDispatch();
+
+	const { user, isLoading, isError, isSuccess, message } = useSelector(
+		(state) => state.auth
+	);
+
+	useEffect(() => {
+		if (isError) {
+			console.log("Error, try to find the solution!");;
+		}
+
+		if (isSuccess || user) {
+			navigate('/home');
+		}
+
+		dispatch(reset());
+	}, [user, isError, isSuccess, message, navigate, dispatch]);
+
 	const submitHandler = (e) => {
 		e.preventDefault();
-		const enteredEmail = loginNameRef.current.value;
-		const enteredPassword = loginPasswordRef.current.value;
-		fetch(
-			'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyDI3asXL7nJIx1Aio1Y_dgOfj-Xpw3zXJY',
-			{
-				method: 'POST',
-				body: JSON.stringify({
-					email: enteredEmail,
-					password: enteredPassword,
-					returnSecureToken: true,
-				}),
-				headers: {
-					'Content-Type': 'application/json',
-				},
-			}
-		)
-			.then((res) => {
-				if (res.ok) {
-					return res.json();
-				} else {
-					return res.json().then((data) => {
-						let errorMessage = 'Authentication failed!';
-						// if (data && data.error && data.error.message) {
-						//   errorMessage = data.error.message;
-						// }
 
-						throw new Error(errorMessage);
-					});
-				}
-			})
-			.then((data) => {
-				console.log(data);
-			})
-			.catch((err) => {
-				alert(err.message);
-			});
+		const userData = {
+			loginNameRef,
+			loginPasswordRef,
+		};
+
+		dispatch(login(userData));
+	};
+
+	if (isLoading) {
+		return <Spinner />;
 	};
 
 	return (

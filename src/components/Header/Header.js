@@ -1,10 +1,11 @@
 import { useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { NavLink, Link } from 'react-router-dom';
+import { NavLink, Link, useNavigate } from 'react-router-dom';
 import { Container } from 'reactstrap';
 import logo from '../../assets/images/logo.png';
 import { cartUiActions } from '../../store/shopping-cart/cartUiSlice';
 import '../../globalstyles/header.css';
+import { reset, logout } from '../../store/auth/authSlice';
 
 const nav_link = [
 	{ display: 'Home', path: '/home' },
@@ -17,12 +18,24 @@ export default function Header() {
 	const navbarRef = useRef(null);
 	const headerRef = useRef(null);
 
+	const navigate = useNavigate();
+	const dispatch = useDispatch();
+
+	const { user } = useSelector((state) => state.auth);
+
 	const toggleNavbar = () => navbarRef.current.classList.toggle('show__navbar');
 
 	const totalQuantity = useSelector((state) => state.cart.totalQuantity);
 
-	const dispatch = useDispatch()
-	const toggleCart = () => { dispatch(cartUiActions.toggle())}
+	const toggleCart = () => {
+		dispatch(cartUiActions.toggle());
+	};
+
+	const onLogout = () => {
+		dispatch(logout());
+		dispatch(reset());
+		navigate('/home');
+	};
 
 	useEffect(() => {
 		window.addEventListener('scroll', () => {
@@ -71,11 +84,17 @@ export default function Header() {
 							<i className="ri-shopping-basket-fill"></i>
 							<span className="cart__badge">{totalQuantity}</span>
 						</span>
-						<span className="user">
-							<Link to="/login">
-								<i className="ri-user-5-line"></i>
-							</Link>
-						</span>
+						{user ? (
+							<button className="user-logout" onClick={onLogout}>
+								Logout
+							</button>
+						) : (
+							<span className="user">
+								<Link to="/login">
+									<i className="ri-user-5-line">Login</i>
+								</Link>
+							</span>
+						)}
 						<span className="mobile__navbar" onClick={toggleNavbar}>
 							<i className="ri-menu-2-line"></i>
 						</span>

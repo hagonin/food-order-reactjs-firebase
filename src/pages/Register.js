@@ -1,54 +1,67 @@
-import { useRef } from 'react';
+import { useEffect, useState } from 'react';
 import Title from '../components/Title/Title';
 import CommonSection from '../components/UI/common-section/CommonSection';
 import { Container, Row, Col } from 'reactstrap';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { reset, register } from '../store/auth/authSlice';
+import Spinner from '../components/Spinner/Spinner';
 
 const Register = () => {
-	const signupFirstNameRef = useRef();
-	const signupLastNameRef = useRef();
-	const signupEmailRef = useRef();
-	const signupPasswordRef = useRef();
-	const signupConfirmPasswordRef = useRef();
+	const [formData, setFormData] = useState({
+		firstName: '',
+		lastName: '',
+		email: '',
+		password: '',
+		confirmPassword: '',
+	});
 
-	const submitHandler = (e) => {
+	const { firstName, lastName, email, password, confirmPassword } = formData;
+	const navigate = useNavigate();
+	const dispatch = useDispatch();
+
+	const { user, isLoading, isError, isSuccess, message } = useSelector(
+		(state) => state.auth
+	);
+
+	useEffect(() => {
+		if (isError) {
+			console.log('Error please find anothe solution');
+		}
+		if (isSuccess || user) {
+			navigate('/home');
+
+			dispatch(reset());
+		}
+	}, [user, isError, isSuccess, message, navigate, dispatch]);
+
+	const handleChange = (e) => {
+		setFormData((prevState) => ({
+			...prevState,
+			[e.target.name]: e.target.value,
+		}));
+	};
+
+	const handleSubmit = (e) => {
 		e.preventDefault();
 
-		const enteredFirstName = signupFirstNameRef.current.value;
-		const enteredLastName = signupLastNameRef.current.value;
-		const enteredEmail = signupEmailRef.current.value;
-		const enteredPassword = signupPasswordRef.current.value;
-		const enteredConfirmPassword = signupConfirmPasswordRef.current.value;
-
-		fetch(
-			'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyDI3asXL7nJIx1Aio1Y_dgOfj-Xpw3zXJY',
-			{
-				method: 'POST',
-				body: JSON.stringify({
-					firstName: enteredFirstName,
-					lastName: enteredLastName,
-					email: enteredEmail,
-					password: enteredPassword,
-					confirmPassword: enteredConfirmPassword,
-					returnSecureToken: true,
-				}),
-				headers: {
-					'Content-Type': 'application/json',
-				},
-			}
-		).then((res) => {
-			if (res.ok) {
-			} else {
-				res.json().then((data) => {
-					let errorMessage = 'Authentication failed!';
-					if (data && data.error && data.error.message) {
-						errorMessage = data.error.message;
-					}
-					alert(errorMessage)
-				});
-			}
-		});
+		if (password !== confirmPassword) {
+			console.log('Passwords do not match');
+		} else {
+			const userData = {
+				firstName,
+				lastName,
+				email,
+				password,
+				confirmPassword,
+			};
+			dispatch(register(userData));
+		}
 	};
+
+	if (isLoading) {
+		return <Spinner />;
+	}
 
 	return (
 		<Title title="Signup">
@@ -56,14 +69,17 @@ const Register = () => {
 			<section className="my-3">
 				<Container>
 					<Row>
-						<Col lg="6" md="6" sm="12" className="m-auto text-center">
-							<form className="form mb-5" onSubmit={submitHandler}>
+						<Col lg="10" md="6" sm="12" className="m-auto text-center">
+							<h5 className="text-center">Please create an account</h5>
+							<form className="form mb-5" onSubmit={handleSubmit}>
 								<div className="form__group">
 									<input
 										type="text"
 										placeholder="First name"
 										required
-										ref={signupFirstNameRef}
+										name="firstName"
+										value={firstName}
+										onChange={handleChange}
 									/>
 								</div>
 								<div className="form__group">
@@ -71,7 +87,9 @@ const Register = () => {
 										type="text"
 										placeholder="Last name"
 										required
-										ref={signupLastNameRef}
+										name="lastName"
+										value={lastName}
+										onChange={handleChange}
 									/>
 								</div>
 								<div className="form__group">
@@ -79,7 +97,9 @@ const Register = () => {
 										type="email"
 										placeholder="Email"
 										required
-										ref={signupEmailRef}
+										name="email"
+										value={email}
+										onChange={handleChange}
 									/>
 								</div>
 								<div className="form__group">
@@ -87,7 +107,9 @@ const Register = () => {
 										type="password"
 										placeholder="Password"
 										required
-										ref={signupPasswordRef}
+										name="password"
+										value={password}
+										onChange={handleChange}
 									/>
 								</div>
 								<div className="form__group">
@@ -95,7 +117,9 @@ const Register = () => {
 										type="password"
 										placeholder="Confirm Password"
 										required
-										ref={signupConfirmPasswordRef}
+										name="confirmPassword"
+										value={confirmPassword}
+										onChange={handleChange}
 									/>
 								</div>
 								<button type="submit" className="addToCart__btn">

@@ -1,98 +1,94 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import authService from './authService';
+
+// get user from localStorage
+
+const user = JSON.parse(localStorage.getItem('user'));
 
 const initialState = {
-	userInfo: {},
-	userToken: null,
+	user: user ? user : null,
 	isLoading: false,
 	isError: false,
 	isSuccess: false,
+	message: '',
 };
 
-export const registerUser = createAsyncThunk(
+// Register user
+export const register = createAsyncThunk(
 	'user/register',
-	async (
-		{ firstName, lastName, email, password, confirmPassword },
-		{ rejectWithValue }
-	) => {
+	async (user, thunkAPI) => {
 		try {
-			const config = { headers: { 'Content-Type': 'application/json' } };
-			await fetch(
-				'https://identitytoolkit.googleapis.com/v1/accounts:lookup?key=AIzaSyDI3asXL7nJIx1Aio1Y_dgOfj-Xpw3zXJY',
-				{ firstName, lastName, email, password, confirmPassword },
-				config
-			);
+			return await authService.register(user);
 		} catch (error) {
-			if (error.response && error.response.data.message) {
-				return rejectWithValue(error.response.data.message);
-			} else {
-				return rejectWithValue(error.message);
-			}
+			const message =
+				(error.message && error.response.data && error.response.data.message) ||
+				error.message ||
+				error.toString();
+			return thunkAPI.rejectWithValue(message);
 		}
 	}
 );
+// Login user
+export const login = createAsyncThunk('auth/login', async (user, thunkAPI) => {
+  try {
+    return await authService.login(user)
+  } catch (error) {
+    const message =
+      (error.response && error.response.data && error.response.data.message) ||
+      error.message ||
+      error.toString()
+    return thunkAPI.rejectWithValue(message)
+  }
+})
 
-export const loginUser = createAsyncThunk(
-	'auth/login',
-	async ({ email, password }, { rejectWithValue }) => {
-		try {
-			const config = { headers: { 'Content-Type': 'application/json' } };
-			await fetch(
-				'https://identitytoolkit.googleapis.com/v1/accounts:lookup?key=AIzaSyDI3asXL7nJIx1Aio1Y_dgOfj-Xpw3zXJY',
-				{ email, password },
-				config
-			);
-		} catch (error) {
-			if (error.response && error.response.data.message) {
-				return rejectWithValue(error.response.data.message);
-			} else {
-				return rejectWithValue(error.message);
-			}
-		}
-	}
-);
+// Logout user
+export const logout = createAsyncThunk('auth/logout', async () => {
+  authService.logout()
+})
 
 const authSlice = createSlice({
 	name: 'auth',
 	initialState,
 	reducers: {
 		reset: (state) => {
-			state.userToken = null;
+			// state.userToken = null;
 			state.isLoading = false;
 			state.isError = false;
 			state.isSuccess = false;
+			state.message = '';
 		},
 	},
 	extraReducers: (builder) => {
 		builder
-			.addCase(registerUser.pending, (state) => {
+			.addCase(register.pending, (state) => {
 				state.isLoading = true;
 			})
-			.addCase(registerUser.fulfilled, (state, action) => {
+			.addCase(register.fulfilled, (state, action) => {
 				state.isLoading = false;
 				state.isSuccess = true;
-				state.userInfo = action.payload;
+				state.user = action.payload;
 			})
-			.addCase(registerUser.rejected, (state, action) => {
+			.addCase(register.rejected, (state, action) => {
 				state.isLoading = false;
 				state.isError = true;
 				state.message = action.payload;
-				state.userInfo = null;
+				state.user = null;
 			})
-			.addCase(loginUser.pending, (state) => {
+			.addCase(login.pending, (state) => {
 				state.isLoading = true;
 			})
-			.addCase(loginUser.fulfilled, (state, action) => {
+			.addCase(login.fulfilled, (state, action) => {
 				state.isLoading = false;
 				state.isSuccess = true;
-				state.userInfo = action.payload;
+				state.user = action.payload;
 			})
-			.addCase(loginUser.rejected, (state, action) => {
+			.addCase(login.rejected, (state, action) => {
 				state.isLoading = false;
 				state.isError = true;
 				state.message = action.payload;
-				state.userInfo = null;
-			})
+				state.user = null;
+			});
 	},
 });
-
+export const {reset} = authSlice.actions;
 export default authSlice;
