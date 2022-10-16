@@ -12,12 +12,11 @@ const register = async (userData) => {
 	return response.data;
 };
 // Login user
-const login = async (userData) => {
+const login = async (email, password) => {
 	const response = await axios.post(
 		'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyDI3asXL7nJIx1Aio1Y_dgOfj-Xpw3zXJY',
-		userData
+		{ email, password }
 	);
-
 	if (response.data) {
 		localStorage.setItem('user', JSON.stringify(response.data));
 	}

@@ -4,19 +4,18 @@ import CommonSection from '../components/UI/common-section/CommonSection';
 import { Container, Row, Col } from 'reactstrap';
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { reset, register } from '../store/auth/authSlice';
+import { authActions, register } from '../store/auth/authSlice';
 import Spinner from '../components/Spinner/Spinner';
 
 const Register = () => {
 	const [formData, setFormData] = useState({
-		firstName: '',
-		lastName: '',
+		username:'',
 		email: '',
 		password: '',
 		confirmPassword: '',
 	});
 
-	const { firstName, lastName, email, password, confirmPassword } = formData;
+	const { username, email, password, confirmPassword } = formData;
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
 
@@ -31,7 +30,7 @@ const Register = () => {
 		if (isSuccess || user) {
 			navigate('/home');
 
-			dispatch(reset());
+			dispatch(authActions.reset());
 		}
 	}, [user, isError, isSuccess, message, navigate, dispatch]);
 
@@ -49,8 +48,7 @@ const Register = () => {
 			console.log('Passwords do not match');
 		} else {
 			const userData = {
-				firstName,
-				lastName,
+				username,
 				email,
 				password,
 				confirmPassword,
@@ -75,20 +73,10 @@ const Register = () => {
 								<div className="form__group">
 									<input
 										type="text"
-										placeholder="First name"
+										placeholder="Username"
 										required
-										name="firstName"
-										value={firstName}
-										onChange={handleChange}
-									/>
-								</div>
-								<div className="form__group">
-									<input
-										type="text"
-										placeholder="Last name"
-										required
-										name="lastName"
-										value={lastName}
+										name="username"
+										value={username}
 										onChange={handleChange}
 									/>
 								</div>

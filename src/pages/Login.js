@@ -5,11 +5,11 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import Title from '../components/Title/Title';
 import CommonSection from '../components/UI/common-section/CommonSection';
-import { reset, login } from '../store/auth/authSlice';
+import {authActions, login} from '../store/auth/authSlice';
 import Spinner from '../components/Spinner/Spinner';
 
 const Login = () => {
-	const loginNameRef = useRef();
+	const loginMailRef = useRef();
 	const loginPasswordRef = useRef();
 
 	const navigate = useNavigate();
@@ -21,21 +21,21 @@ const Login = () => {
 
 	useEffect(() => {
 		if (isError) {
-			console.log("Error, try to find the solution!");;
+			console.log('Error, try to find the solution!');
 		}
 
 		if (isSuccess || user) {
 			navigate('/home');
 		}
 
-		dispatch(reset());
+		dispatch(authActions.reset());
 	}, [user, isError, isSuccess, message, navigate, dispatch]);
 
 	const submitHandler = (e) => {
 		e.preventDefault();
 
 		const userData = {
-			loginNameRef,
+			loginMailRef,
 			loginPasswordRef,
 		};
 
@@ -44,7 +44,7 @@ const Login = () => {
 
 	if (isLoading) {
 		return <Spinner />;
-	};
+	}
 
 	return (
 		<Title title="Login">
@@ -59,7 +59,7 @@ const Login = () => {
 										type="email"
 										placeholder="Email"
 										required
-										ref={loginNameRef}
+										ref={loginMailRef}
 									/>
 								</div>
 								<div className="form__group">

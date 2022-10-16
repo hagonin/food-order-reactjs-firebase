@@ -5,7 +5,7 @@ import { Container } from 'reactstrap';
 import logo from '../../assets/images/logo.png';
 import { cartUiActions } from '../../store/shopping-cart/cartUiSlice';
 import '../../globalstyles/header.css';
-import { reset, logout } from '../../store/auth/authSlice';
+import { authActions, logout } from '../../store/auth/authSlice';
 
 const nav_link = [
 	{ display: 'Home', path: '/home' },
@@ -33,7 +33,7 @@ export default function Header() {
 
 	const onLogout = () => {
 		dispatch(logout());
-		dispatch(reset());
+		dispatch(authActions.reset());
 		navigate('/home');
 	};
 
@@ -91,7 +91,7 @@ export default function Header() {
 						) : (
 							<span className="user">
 								<Link to="/login">
-									<i className="ri-user-5-line">Login</i>
+									<i className="ri-user-5-line"></i>
 								</Link>
 							</span>
 						)}

@@ -19,25 +19,10 @@ export default function ProductCard(props) {
 		);
 	};
 	return (
-		// <div className="product__item">
-		// 	<div className="product__img">
-		// 		<img src={image01} alt="product-img" className="" />
-		// 	</div>
-		// 	<div className="product__content">
-		// 		<h5>
-		// 			<Link to={`/foods/${id}`}>{title}</Link>
-		// 		</h5>
-		// 		<div className='d-flex align-items-center justify-content-between'>
-		// 			<span className="product__price">£{price}.00</span>
-		// 			<button className="addToCart__btn" onClick={addToCart}>Add to Cart</button>
-		// 		</div>
-		// 	</div>
-		// </div>
-
 		<Card className="product__item">
 			<img className="product__img" alt="product-img" src={image01} />
 			<CardBody>
-				<CardTitle tag="h5" className='product__content'>
+				<CardTitle tag="h5" className="product__content">
 					<Link to={`/foods/${id}`}>{title}</Link>
 				</CardTitle>
 				<CardText>
