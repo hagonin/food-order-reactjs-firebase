@@ -1,3 +1,4 @@
+import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { Container, Row, Col, ListGroupItem, ListGroup } from 'reactstrap';
@@ -23,30 +24,22 @@ import quality from '../assets/images/quality-food.jpg';
 import network from '../assets/images/social-network.jpg';
 import TestimonialSlider from '../components/UI/slider/TestimonialSlider';
 
-const featureData = [
-	{
-		title: 'Fresh Ingredients',
-		imgUrl: featureImg1,
-		desc: 'Sed egestas, ante vulputa eros pede vitae luctus metus augue.',
-	},
-
-	{
-		title: 'Best recipe',
-		imgUrl: featureImg2,
-		desc: 'Sed egestas, ante vulputa eros pede vitae luctus metus augue.',
-	},
-	{
-		title: 'Vegan Menu',
-		imgUrl: featureImg3,
-		desc: 'Sed egestas, ante vulputa eros pede vitae luctus metus augue.',
-	},
-];
-
 export default function Home() {
 	const [category, setCategory] = useState('ALL');
 	const [allProducts, setAllProducts] = useState(products);
 
 	const [preferredSalad, setPreferredSalad] = useState([]);
+
+	const featureData = () => {
+		axios
+			.get('http://localhost:3002/featureData')
+			.then((res) => {
+				console.log(res.data);
+			})
+			.catch((err) => {
+				throw err;
+			});
+	};
 
 	useEffect(() => {
 		const filteredSalad = products.filter((item) => item.category === 'Salad');
@@ -298,7 +291,11 @@ export default function Home() {
 						</Col>
 
 						<Col lg="6" md="6">
-							<img src={network} alt="testimonial-img" className="testimonial__img" />
+							<img
+								src={network}
+								alt="testimonial-img"
+								className="testimonial__img"
+							/>
 						</Col>
 					</Row>
 				</Container>

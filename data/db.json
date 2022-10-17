@@ -1,0 +1,20 @@
+{
+	"featureData": [
+		{
+			"title": "Fresh Ingredients",
+			"imgUrl": "featureImg1",
+			"desc": "Sed egestas, ante vulputa eros pede vitae luctus metus augue."
+		},
+
+		{
+			"title": "Best recipe",
+			"imgUrl": "featureImg2",
+			"desc": "Sed egestas, ante vulputa eros pede vitae luctus metus augue."
+		},
+		{
+			"title": "Vegan Menu",
+			"imgUrl": "featureImg3",
+			"desc": "Sed egestas, ante vulputa eros pede vitae luctus metus augue."
+		}
+	]
+}
