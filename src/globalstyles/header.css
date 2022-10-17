@@ -98,12 +98,10 @@
 	.navbar {
 		position: absolute;
 		top: 0;
-		right: 0;
 		width: 250px;
 		height: 100%;
 		background: var(--white);
 		flex-direction: column;
-		justify-content: center;
 		align-items: center;
 		z-index: 100;
 		line-height: 20px;

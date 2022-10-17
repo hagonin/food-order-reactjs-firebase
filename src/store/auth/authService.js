@@ -13,7 +13,7 @@ const register = async (userData) => {
 };
 // Login user
 const login = async (email, password) => {
-	const response = await axios.post(
+	const response = await axios.get(
 		'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyDI3asXL7nJIx1Aio1Y_dgOfj-Xpw3zXJY',
 		{ email, password }
 	);

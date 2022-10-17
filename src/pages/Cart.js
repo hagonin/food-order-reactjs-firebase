@@ -22,9 +22,9 @@ export default function Cart() {
 							) : (
 								<table className="table table-bordered">
 									<thead>
-										<tr>
-											<th>Image</th>
-											<th>Product Title</th>
+										<tr className='text-center'>
+											<th>Product</th>
+											<th>Title</th>
 											<th>Price</th>
 											<th>Quantity</th>
 											<th>Delete</th>

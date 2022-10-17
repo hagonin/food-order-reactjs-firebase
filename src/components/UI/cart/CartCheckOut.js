@@ -17,7 +17,7 @@ export default function CartCheckOut({item}) {
 			<td className="text-center">£{price}.00</td>
 			<td className="text-center">{quantity} unity</td>
 			<td className="text-center cart__item-del">
-				<i className="ri-delete-bin-line" onClick={deleteItem}></i>
+				<i className="ri-delete-bin-5-line fs-4" onClick={deleteItem}></i>
 			</td>
 		</tr>
  );

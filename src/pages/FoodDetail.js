@@ -1,13 +1,14 @@
 import { Container, Row, Col } from 'reactstrap';
 import { useParams } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 
-import ProductCard from '../components/UI/products/ProductCard';
-import { cartActions } from '../store/shopping-cart/cartSlice';
 import products from '../assets/fake-API/product';
 import Title from '../components/Title/Title';
 import CommonSection from '../components/UI/common-section/CommonSection';
+import { cartActions } from '../store/shopping-cart/cartSlice';
+import ProductCard from '../components/UI/products/ProductCard';
+import { CartQuantity } from '../components/UI/cart/CartQuantity';
 
 import '../globalstyles/product-detail.css';
 
@@ -34,14 +35,18 @@ export default function FoodDetail() {
 	const [enteredName, setEnteredName] = useState('');
 	const [enteredEmail, setEnteredEmail] = useState('');
 	const [reviewMsg, setReviewMsg] = useState('');
+
 	const { id } = useParams();
 	const dispatch = useDispatch();
 
 	const product = products.find((product) => product.id === id);
 	const [previewImg, setPreviewImg] = useState(product.image01);
-	const { title, price, category, desc, image01 } = product;
+
+	const { title, price, category, desc, image01} = product;
 
 	const relatedProduct = products.filter((item) => category === item.category);
+
+	const totalQuantity = useSelector((state) => state.cart.totalQuantity);
 
 	const addItem = () => {
 		dispatch(
@@ -52,6 +57,10 @@ export default function FoodDetail() {
 				image01,
 			})
 		);
+	};
+
+	const decreaseItem = () => {
+		dispatch(cartActions.removeItem(id));
 	};
 
 	const submitHandler = (e) => {
@@ -67,6 +76,7 @@ export default function FoodDetail() {
 	useEffect(() => {
 		window.scrollTo(0, 0);
 	}, [product]);
+
 	return (
 		<Title title="Product-details">
 			<CommonSection title={title} />
@@ -107,16 +117,21 @@ export default function FoodDetail() {
 							<div className="single__product-content">
 								<h2 className="product__title mb-3">{title}</h2>
 								<p className="product__price">
-									{' '}
 									Price: <span>£{price}.00</span>
 								</p>
 								<p className="category mb-5">
 									Category: <span>{category}</span>
 								</p>
-
-								<button onClick={addItem} className="addToCart__btn">
-									Add to Cart
-								</button>
+								<div className="d-flex gap-2">
+									<CartQuantity
+										incrementItem={addItem}
+										quantity={totalQuantity}
+										decreaseItem={decreaseItem}
+									/>
+									<button onClick={addItem} className="addToCart__btn">
+										Add to Cart
+									</button>
+								</div>
 							</div>
 						</Col>
 
@@ -146,7 +161,9 @@ export default function FoodDetail() {
 										<div className="review pt-3">
 											<p className="user__name mb-0">{item.username}</p>
 											<p className="user__email">{item.userMail}</p>
-											<p className="feedback__text fst-italic">{item.feedback}</p>
+											<p className="feedback__text fst-italic">
+												{item.feedback}
+											</p>
 										</div>
 									))}
 

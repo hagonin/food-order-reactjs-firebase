@@ -1,6 +1,7 @@
-import { cartActions } from '../../../store/shopping-cart/cartSlice';
 import { useDispatch } from 'react-redux';
 import { ListGroupItem } from 'reactstrap';
+import { CartQuantity } from './CartQuantity';
+import { cartActions } from '../../../store/shopping-cart/cartSlice';
 
 import '../../../globalstyles/cart-item.css';
 
@@ -39,15 +40,8 @@ export default function CartItem({ item }) {
 						<p className=" d-flex align-items-center gap-4 cart__product-price">
 							{quantity} x<span>£{totalPrice}.00</span>
 						</p>
-						<div className=" d-flex align-items-center justify-content-between increase__decrease-btn">
-							<span className="increase__btn" onClick={incrementItem}>
-								<i className="ri-add-line"></i>
-							</span>
-							<span className="quantity">{quantity}</span>
-							<span className="decrease__btn" onClick={decreaseItem}>
-								<i className="ri-subtract-line"></i>
-							</span>
-						</div>
+						<CartQuantity incrementItem={incrementItem} quantity={quantity} decreaseItem={decreaseItem}  />
+						
 					</div>
 
 					<span className="delete__btn" onClick={deleteItem}>
