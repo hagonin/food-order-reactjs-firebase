@@ -1,21 +1,24 @@
+import { useState } from 'react';
 import { Container, Row, Col } from 'reactstrap';
 import ReactPaginate from 'react-paginate';
 
-import products from '../assets/fake-API/product';
-import ProductCard from '../components/UI/products/ProductCard';
 import Title from '../components/Title/Title';
 import CommonSection from '../components/UI/common-section/CommonSection';
+import ProductCard from '../components/UI/products/ProductCard';
 
 import '../globalstyles/all-foods.css';
 import '../globalstyles/pagination.css';
-import { useState } from 'react';
+import { useSelector } from 'react-redux';
 
 export default function AllFood() {
 	const [searchTerm, setSearchTerm] = useState('');
 
 	const [pageNumber, setPageNumber] = useState(0);
 
-	const searchedProduct = products.filter((item) => {
+	const productsList = useSelector(state => state.products.products)
+
+
+	const searchedProduct = productsList.filter((item) => {
 		if (searchTerm.valueOf === '') {
 			return item;
 		}

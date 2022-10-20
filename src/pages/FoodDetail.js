@@ -2,8 +2,8 @@ import { Container, Row, Col } from 'reactstrap';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
+import { getProductDetail, getProducts } from '../store/products/productSlice';
 
-import products from '../assets/fake-API/product';
 import Title from '../components/Title/Title';
 import CommonSection from '../components/UI/common-section/CommonSection';
 import { cartActions } from '../store/shopping-cart/cartSlice';
@@ -39,14 +39,24 @@ export default function FoodDetail() {
 	const { id } = useParams();
 	const dispatch = useDispatch();
 
-	const product = products.find((product) => product.id === id);
+	const products = useSelector((state) => state.products.products);
+
+	const product = useSelector((state) => state.products.selectedProduct);
+
+	useEffect(() => {
+		if (products.length === 0) {
+			dispatch(getProducts());
+		}
+		dispatch(getProductDetail(id));
+	}, []);
+
 	const [previewImg, setPreviewImg] = useState(product.image01);
 
-	const { title, price, category, desc, image01} = product;
+	const { title, price, category, desc, image01 } = product;
 
 	const relatedProduct = products.filter((item) => category === item.category);
 
-	const totalQuantity = useSelector((state) => state.cart.totalQuantity);
+	let [quantity, setQuantity] = useState(0);
 
 	const addItem = () => {
 		dispatch(
@@ -55,12 +65,19 @@ export default function FoodDetail() {
 				title,
 				price,
 				image01,
+				quantity,
 			})
 		);
 	};
-
+	const increaseItem = () => {
+		setQuantity(quantity++);
+	};
 	const decreaseItem = () => {
-		dispatch(cartActions.removeItem(id));
+		if (quantity > 1) {
+			setQuantity(quantity--);
+		} else {
+			setQuantity(0);
+		}
 	};
 
 	const submitHandler = (e) => {
@@ -124,8 +141,8 @@ export default function FoodDetail() {
 								</p>
 								<div className="d-flex gap-2">
 									<CartQuantity
-										incrementItem={addItem}
-										quantity={totalQuantity}
+										incrementItem={increaseItem}
+										quantity={quantity}
 										decreaseItem={decreaseItem}
 									/>
 									<button onClick={addItem} className="addToCart__btn">

@@ -1,0 +1,135 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "email": "admin@gmail.com",
+      "password": "letmein",
+      "firstname": "",
+      "lastname": ""
+    }
+  ],
+  "carts": [
+    {
+      "id": 1,
+      "userId": 1
+    }
+  ],
+  "cartItems": [
+    {
+      "id": 1,
+      "cartId": 1,
+      "productId": 1
+    }
+  ],
+  "featureData": [
+    {
+      "id": 1,
+      "title": "Fresh Ingredients",
+      "imgUrl": "https://firebasestorage.googleapis.com/v0/b/food-ordering-8246c.appspot.com/o/freshveg.png?alt=media&token=35f644b4-1159-4e2e-adb5-b01845d60627",
+      "desc": "Sed egestas, ante vulputa eros pede vitae luctus metus augue."
+    },
+
+    {
+      "id": 2,
+      "title": "Best recipe",
+      "imgUrl": "https://firebasestorage.googleapis.com/v0/b/food-ordering-8246c.appspot.com/o/best-recipe.png?alt=media&token=efff5d2a-c40c-41ac-a3cf-a38fbf6f5202",
+      "desc": "Sed egestas, ante vulputa eros pede vitae luctus metus augue."
+    },
+    {
+      "id": 3,
+      "title": "Vegan Menu",
+      "imgUrl": "https://firebasestorage.googleapis.com/v0/b/food-ordering-8246c.appspot.com/o/vegan.png?alt=media&token=df30fe65-3d08-4a66-bf60-7241863f5ebe",
+      "desc": "Sed egestas, ante vulputa eros pede vitae luctus metus augue."
+    }
+  ],
+
+  "reviewClient": [
+    {
+      "id": 1,
+      "userName": "John doe",
+      "comment": "I have nothing but good things to say about Healthy Food I've had a few issues, with courriers delivering to the wrong address, missing items, and food prepared incorrectly, but these are not the fault of this company ",
+      "image": "https://firebasestorage.googleapis.com/v0/b/food-ordering-8246c.appspot.com/o/avatar%2Favatar-1.png?alt=media&token=b691a000-f898-4111-86e1-1e68dad12a7d"
+    },
+    {
+      "id": 2,
+      "userName": "Mitchell Marsh",
+      "comment": "Food arrived as indicated on the website. There was an issue with our order - not the delivery driver's fault - got someone else's drinks but not our own. Customer services sorted quickly. Well done!",
+      "image": "https://firebasestorage.googleapis.com/v0/b/food-ordering-8246c.appspot.com/o/avatar%2Favatar-2.png?alt=media&token=91cce7e6-46d8-4425-9e6a-120ec5b6f931"
+    },
+    {
+      "id": 3,
+      "userName": "Lila Marshal",
+      "comment": "I was craving Junk food but healthy option so I ordered from Hola healthy options . The most delicious healthy deserts I ever had and it came just in time . I’ll definitely order again !",
+      "image": "https://firebasestorage.googleapis.com/v0/b/food-ordering-8246c.appspot.com/o/avatar%2Favatar-3.png?alt=media&token=a597fbe1-6692-4124-ae5f-e8c7ef157d35"
+    },
+    {
+      "id": 4,
+      "userName": "Steven Crock",
+      "comment": "I'm a regular their client. The Healthy Food experience is quite simply phenomenal ! From start to finish every single order delivery is flawless. Even during the historic heatwave food delivered quickly. And the drivers are friendly and polite. A very enjoyable experience!",
+      "image": "https://firebasestorage.googleapis.com/v0/b/food-ordering-8246c.appspot.com/o/avatar%2Favatar-4.png?alt=media&token=55709643-312b-49e1-848e-dceedd4834dc"
+    }
+  ],
+  "products": [
+    {
+      "id": 1,
+      "title": "Mixed salad",
+      "price": 14.0,
+      "image01": "https://firebasestorage.googleapis.com/v0/b/food-ordering-8246c.appspot.com/o/banner-02.jpg?alt=media&token=c29a147f-bd1b-4574-99bd-08832a9260c7",
+      "image02": "https://firebasestorage.googleapis.com/v0/b/food-ordering-8246c.appspot.com/o/products%2Fproduct-2.jpg?alt=media&token=f76575fb-a492-48a2-bc1b-4057d9ea28da",
+      "image03": "https://firebasestorage.googleapis.com/v0/b/food-ordering-8246c.appspot.com/o/products%2Fproduct-3.jpg?alt=media&token=b6e4e5f2-e246-4ffd-bb5f-13e4ee3e0ae5",
+      "category": "Salad",
+      "desc": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta ad et est, fugiat repudiandae neque illo delectus commodi magnam explicabo autem voluptates eaque velit vero facere mollitia. Placeat rem, molestiae error obcaecati enim doloribus impedit aliquam, maiores qui minus neque. "
+    },
+
+    {
+      "id": 2,
+      "title": "Mixed salad",
+      "price": 14.0,
+      "image01": "https://firebasestorage.googleapis.com/v0/b/food-ordering-8246c.appspot.com/o/banner-02.jpg?alt=media&token=c29a147f-bd1b-4574-99bd-08832a9260c7",
+      "image02": "https://firebasestorage.googleapis.com/v0/b/food-ordering-8246c.appspot.com/o/products%2Fproduct-2.jpg?alt=media&token=f76575fb-a492-48a2-bc1b-4057d9ea28da",
+      "image03": "https://firebasestorage.googleapis.com/v0/b/food-ordering-8246c.appspot.com/o/products%2Fproduct-3.jpg?alt=media&token=b6e4e5f2-e246-4ffd-bb5f-13e4ee3e0ae5",
+      "category": "Meat",
+      "desc": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta ad et est, fugiat repudiandae neque illo delectus commodi magnam explicabo autem voluptates eaque velit vero facere mollitia. Placeat rem, molestiae error obcaecati enim doloribus impedit aliquam, maiores qui minus neque. "
+    },
+    {
+      "id": 3,
+      "title": "Mixed salad",
+      "price": 14.0,
+      "image01": "https://firebasestorage.googleapis.com/v0/b/food-ordering-8246c.appspot.com/o/banner-02.jpg?alt=media&token=c29a147f-bd1b-4574-99bd-08832a9260c7",
+      "image02": "https://firebasestorage.googleapis.com/v0/b/food-ordering-8246c.appspot.com/o/products%2Fproduct-2.jpg?alt=media&token=f76575fb-a492-48a2-bc1b-4057d9ea28da",
+      "image03": "https://firebasestorage.googleapis.com/v0/b/food-ordering-8246c.appspot.com/o/products%2Fproduct-3.jpg?alt=media&token=b6e4e5f2-e246-4ffd-bb5f-13e4ee3e0ae5",
+      "category": "Pasta",
+      "desc": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta ad et est, fugiat repudiandae neque illo delectus commodi magnam explicabo autem voluptates eaque velit vero facere mollitia. Placeat rem, molestiae error obcaecati enim doloribus impedit aliquam, maiores qui minus neque. "
+    },
+    {
+      "id": 4,
+      "title": "Mixed salad",
+      "price": 14.0,
+      "image01": "https://firebasestorage.googleapis.com/v0/b/food-ordering-8246c.appspot.com/o/banner-02.jpg?alt=media&token=c29a147f-bd1b-4574-99bd-08832a9260c7",
+      "image02": "https://firebasestorage.googleapis.com/v0/b/food-ordering-8246c.appspot.com/o/products%2Fproduct-2.jpg?alt=media&token=f76575fb-a492-48a2-bc1b-4057d9ea28da",
+      "image03": "https://firebasestorage.googleapis.com/v0/b/food-ordering-8246c.appspot.com/o/products%2Fproduct-3.jpg?alt=media&token=b6e4e5f2-e246-4ffd-bb5f-13e4ee3e0ae5",
+      "category": "Salad",
+      "desc": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta ad et est, fugiat repudiandae neque illo delectus commodi magnam explicabo autem voluptates eaque velit vero facere mollitia. Placeat rem, molestiae error obcaecati enim doloribus impedit aliquam, maiores qui minus neque. "
+    },
+    {
+      "id": 5,
+      "title": "Mixed salad",
+      "price": 14.0,
+      "image01": "https://firebasestorage.googleapis.com/v0/b/food-ordering-8246c.appspot.com/o/banner-02.jpg?alt=media&token=c29a147f-bd1b-4574-99bd-08832a9260c7",
+      "image02": "https://firebasestorage.googleapis.com/v0/b/food-ordering-8246c.appspot.com/o/products%2Fproduct-2.jpg?alt=media&token=f76575fb-a492-48a2-bc1b-4057d9ea28da",
+      "image03": "https://firebasestorage.googleapis.com/v0/b/food-ordering-8246c.appspot.com/o/products%2Fproduct-3.jpg?alt=media&token=b6e4e5f2-e246-4ffd-bb5f-13e4ee3e0ae5",
+      "category": "Meat",
+      "desc": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta ad et est, fugiat repudiandae neque illo delectus commodi magnam explicabo autem voluptates eaque velit vero facere mollitia. Placeat rem, molestiae error obcaecati enim doloribus impedit aliquam, maiores qui minus neque. "
+    },
+    {
+      "id": 6,
+      "title": "Mixed salad",
+      "price": 14.0,
+      "image01": "https://firebasestorage.googleapis.com/v0/b/food-ordering-8246c.appspot.com/o/banner-02.jpg?alt=media&token=c29a147f-bd1b-4574-99bd-08832a9260c7",
+      "image02": "https://firebasestorage.googleapis.com/v0/b/food-ordering-8246c.appspot.com/o/products%2Fproduct-2.jpg?alt=media&token=f76575fb-a492-48a2-bc1b-4057d9ea28da",
+      "image03": "https://firebasestorage.googleapis.com/v0/b/food-ordering-8246c.appspot.com/o/products%2Fproduct-3.jpg?alt=media&token=b6e4e5f2-e246-4ffd-bb5f-13e4ee3e0ae5",
+      "category": "Salad",
+      "desc": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta ad et est, fugiat repudiandae neque illo delectus commodi magnam explicabo autem voluptates eaque velit vero facere mollitia. Placeat rem, molestiae error obcaecati enim doloribus impedit aliquam, maiores qui minus neque. "
+    }
+  ]
+}
