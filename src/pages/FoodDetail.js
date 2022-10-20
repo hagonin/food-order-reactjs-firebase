@@ -7,34 +7,14 @@ import { getProductDetail, getProducts } from '../store/products/productSlice';
 import Title from '../components/Title/Title';
 import CommonSection from '../components/UI/common-section/CommonSection';
 import { cartActions } from '../store/shopping-cart/cartSlice';
+import Feedback from '../components/UI/feedback/Feedback';
 import ProductCard from '../components/UI/products/ProductCard';
 import { CartQuantity } from '../components/UI/cart/CartQuantity';
 
 import '../globalstyles/product-detail.css';
 
-const feedbackUser = [
-	{
-		username: 'Johnathan',
-		userMail: 'johnbt@gmail.com',
-		feedback: ' The food is delicious and hot! I recommended this website',
-	},
-	{
-		username: 'Lola',
-		userMail: 'Linheyda.ted@gmail.com',
-		feedback: ' The food is delicious and hot! I recommended this website',
-	},
-	{
-		username: 'Michelle Robert',
-		userMail: 'mb.todey@outlook.com',
-		feedback: ' The food is delicious and hot! I recommended this website',
-	},
-];
-
 export default function FoodDetail() {
 	const [tab, setTab] = useState('desc');
-	const [enteredName, setEnteredName] = useState('');
-	const [enteredEmail, setEnteredEmail] = useState('');
-	const [reviewMsg, setReviewMsg] = useState('');
 
 	const { id } = useParams();
 	const dispatch = useDispatch();
@@ -56,7 +36,7 @@ export default function FoodDetail() {
 
 	const relatedProduct = products.filter((item) => category === item.category);
 
-	let [quantity, setQuantity] = useState(0);
+	let [quantity, setQuantity] = useState(1);
 
 	const addItem = () => {
 		dispatch(
@@ -70,20 +50,14 @@ export default function FoodDetail() {
 		);
 	};
 	const increaseItem = () => {
-		setQuantity(quantity++);
+		setQuantity(++quantity);
 	};
 	const decreaseItem = () => {
 		if (quantity > 1) {
-			setQuantity(quantity--);
+			setQuantity(--quantity);
 		} else {
 			setQuantity(0);
 		}
-	};
-
-	const submitHandler = (e) => {
-		e.preventDefault();
-
-		console.log(enteredName, enteredEmail, reviewMsg);
 	};
 
 	useEffect(() => {
@@ -173,51 +147,7 @@ export default function FoodDetail() {
 									<p>{desc}</p>
 								</div>
 							) : (
-								<div className="tab__form mb-3">
-									{feedbackUser.map((item) => (
-										<div className="review pt-3">
-											<p className="user__name mb-0">{item.username}</p>
-											<p className="user__email">{item.userMail}</p>
-											<p className="feedback__text fst-italic">
-												{item.feedback}
-											</p>
-										</div>
-									))}
-
-									<form className="form" onSubmit={submitHandler}>
-										<div className="form__group">
-											<input
-												type="text"
-												placeholder="Enter your name"
-												onChange={(e) => setEnteredName(e.target.value)}
-												required
-											/>
-										</div>
-
-										<div className="form__group">
-											<input
-												type="text"
-												placeholder="Enter your email"
-												onChange={(e) => setEnteredEmail(e.target.value)}
-												required
-											/>
-										</div>
-
-										<div className="form__group">
-											<textarea
-												rows={5}
-												type="text"
-												placeholder="Write your review"
-												onChange={(e) => setReviewMsg(e.target.value)}
-												required
-											/>
-										</div>
-
-										<button type="submit" className="addToCart__btn">
-											Submit
-										</button>
-									</form>
-								</div>
+								<Feedback />
 							)}
 						</Col>
 

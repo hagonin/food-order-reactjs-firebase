@@ -3,7 +3,7 @@ import axios from 'axios';
 // Register user
 const register = async (userData) => {
 	const response = await axios.post(
-		'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyDI3asXL7nJIx1Aio1Y_dgOfj-Xpw3zXJY',
+		'/users',
 		userData
 	);
 	if (response.data) {
@@ -14,7 +14,7 @@ const register = async (userData) => {
 // Login user
 const login = async (email, password) => {
 	const response = await axios.get(
-		'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyDI3asXL7nJIx1Aio1Y_dgOfj-Xpw3zXJY',
+		'users',
 		{ email, password }
 	);
 	if (response.data) {

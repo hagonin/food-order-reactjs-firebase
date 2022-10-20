@@ -15,6 +15,7 @@ export default function ProductCard(props) {
 				title,
 				image01,
 				price,
+				quantity:1
 			})
 		);
 	};

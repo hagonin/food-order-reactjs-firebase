@@ -49,7 +49,7 @@ export default function Header() {
 			}
 		});
 
-		// return () => window.removeEventListener('scroll');
+		return () => window.removeEventListener('scroll',null);
 	}, []);
 
 	return (

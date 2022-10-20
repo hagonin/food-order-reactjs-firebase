@@ -4,6 +4,7 @@ import { Container, Row, Col, ListGroupItem, ListGroup } from 'reactstrap';
 
 import Title from '../components/Title/Title';
 import imgHero from '../assets/images/hero.jpg';
+import Feature from '../components/UI/feature/feature';
 import HowItWorks from '../components/UI/how-it-works/HowItWorks';
 
 import '../globalstyles/hero-section.css';
@@ -22,9 +23,6 @@ import { getProducts, productActions } from '../store/products/productSlice';
 
 export default function Home() {
 	const [category, setCategory] = useState('ALL');
-	// const [allProducts, setAllProducts] = useState([]);
-	const [loadedFeature, setLoadedFeature] = useState([]);
-	const [preferredSalad, setPreferredSalad] = useState([]);
 
 	const allProducts = useSelector((state) => state.products.products);
 	const dispatch = useDispatch();
@@ -32,13 +30,8 @@ export default function Home() {
 	useEffect(() => {
 		dispatch(getProducts());
 
-		// const filteredSalad = allProducts.filter(
-		// 	(item) => item.category === 'Salad'
-		// );
-		// const sliceSalad = filteredSalad.slice(0, 4);
-		// setPreferredSalad(sliceSalad);
 	}, []);
-
+	
 	const filteredProducts = useSelector((state) => state.products.filterProduct);
 
 	return (
@@ -75,40 +68,7 @@ export default function Home() {
 				<HowItWorks />
 			</section>
 			<section>
-				<Container>
-					<Row>
-						<Col lg="12" className="text-center mt-5">
-							<h5 className="feature__subtitle mb-4">What we serve</h5>
-							<h2 className="feature__title">Just sit back at home</h2>
-							<h2 className="feature__title">
-								we will <span>take care</span>
-							</h2>
-							<p className="mb-1 mt-4 feature__text">
-								Enjoy delicious, satisfying helthy meals you can make with
-								everyday ingredients - no weighing, no measuring and no counting
-								calories. We will deliver you an amazing meal of your life.
-							</p>
-							<p className="feature__text mt-3">
-								The best healthy food let you order whatever you want to eat
-								with just the click of a button. No need to dine in or even
-								drive anywhere to pick up the meal.
-							</p>
-						</Col>
-						{loadedFeature.map((item, index) => (
-							<Col lg="4" md="6" sm="12" key={index} className="mt-5">
-								<div className="feature__item text-center">
-									<img
-										src={item.imgUrl}
-										alt="feature-img"
-										className="w-25 mb-3"
-									/>
-									<h5 className="fw-bold mb-3">{item.title}</h5>
-									<p>{item.desc}</p>
-								</div>
-							</Col>
-						))}
-					</Row>
-				</Container>
+				<Feature />
 			</section>
 			<section>
 				<Container>
@@ -225,21 +185,6 @@ export default function Home() {
 								</ListGroup>
 							</div>
 						</Col>
-					</Row>
-				</Container>
-			</section>
-			<section className="py-5">
-				<Container>
-					<Row>
-						<Col lg="12" className="text-center mb-5 ">
-							<h2 className="text-uppercase">our suggestion</h2>
-						</Col>
-
-						{preferredSalad.map((item) => (
-							<Col lg="3" md="4" sm="6" xs="6" key={item.id}>
-								<ProductCard item={item} />
-							</Col>
-						))}
 					</Row>
 				</Container>
 			</section>
