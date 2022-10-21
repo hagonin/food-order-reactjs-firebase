@@ -7,7 +7,7 @@ const register = async (userData) => {
 		localStorage.setItem('token', response.data.token);
 		return { ...response, userData };
 	} 
-	return response.data
+	return response.data 
 };
 // Login user
 const login = async (email, password) => {

@@ -49,8 +49,7 @@ const Register = () => {
 			const userData = {
 				username,
 				email,
-				password,
-				confirmPassword,
+				password
 			};
 			console.log('register successfully', userData);
 			dispatch(register(userData));
