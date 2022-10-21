@@ -6,6 +6,7 @@ import Title from '../components/Title/Title';
 import imgHero from '../assets/images/hero.jpg';
 import Feature from '../components/UI/feature/feature';
 import HowItWorks from '../components/UI/how-it-works/HowItWorks';
+import OurSuggestion from '../components/UI/slider/OurSuggestion'
 
 import '../globalstyles/hero-section.css';
 import '../globalstyles/home.css';
@@ -24,7 +25,7 @@ import { getProducts, productActions } from '../store/products/productSlice';
 export default function Home() {
 	const [category, setCategory] = useState('ALL');
 
-	const allProducts = useSelector((state) => state.products.products);
+	// const allProducts = useSelector((state) => state.products.products);
 	const dispatch = useDispatch();
 
 	useEffect(() => {
@@ -49,10 +50,12 @@ export default function Home() {
 								</h1>
 								<p>Change Your Lifestyles For The Better</p>
 								<div className="hero__btns d-flex align-items-center gap-5 mt-4">
-									<button className="order__btn">Get Started Today</button>
-									<button className="all__foods-btn">
-										<Link to="/foods">See Our Menu</Link>
-									</button>
+									<Link to="/foods">
+										<button className="order__btn">Get Started Today</button>
+									</Link>
+									<Link to="/foods">
+										<button className="all__foods-btn">See Our Menu</button>
+									</Link>
 								</div>
 							</div>
 						</Col>
@@ -185,6 +188,16 @@ export default function Home() {
 								</ListGroup>
 							</div>
 						</Col>
+					</Row>
+				</Container>
+			</section>
+			<section>
+				<Container>
+					<Row>
+						<Col lg="12" className="text-center mb-5 ">
+							<h2>Our Suggestion</h2>
+						</Col>
+						<OurSuggestion/>
 					</Row>
 				</Container>
 			</section>

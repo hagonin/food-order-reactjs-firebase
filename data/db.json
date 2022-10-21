@@ -6,6 +6,9 @@
       "password": "letmein",
       "firstname": "",
       "lastname": ""
+    },
+    {
+      "id": 2
     }
   ],
   "carts": [
