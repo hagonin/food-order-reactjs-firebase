@@ -1,3 +1,4 @@
+import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { Container, Row, Col } from 'reactstrap';
 import ReactPaginate from 'react-paginate';
@@ -5,11 +6,10 @@ import ReactPaginate from 'react-paginate';
 import Title from '../components/Title/Title';
 import CommonSection from '../components/UI/common-section/CommonSection';
 import ProductCard from '../components/UI/products/ProductCard';
+import { getProducts } from '../store/products/productSlice';
 
 import '../globalstyles/all-foods.css';
 import '../globalstyles/pagination.css';
-import { useDispatch, useSelector } from 'react-redux';
-import { getProducts } from '../store/products/productSlice';
 
 export default function AllFood() {
 	const [searchTerm, setSearchTerm] = useState('');
@@ -51,7 +51,7 @@ export default function AllFood() {
 		setPageNumber(selected);
 	};
 	return (
-		<Title title="All-Food">
+		<Title title="All Food">
 			<CommonSection title="All Foods" />
 			<section  className='mb-5'>
 				<Container>

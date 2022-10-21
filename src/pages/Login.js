@@ -26,7 +26,7 @@ const Login = () => {
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
 
-	const { user, isLoading, isError, isSuccess, message } = useSelector(
+	const { user, isLoading, isError, isSuccess } = useSelector(
 		(state) => state.auth
 	);
 
@@ -40,7 +40,7 @@ const Login = () => {
 		}
 
 		dispatch(authActions.reset());
-	}, [user, isError, isSuccess, message, navigate, dispatch]);
+	}, [user, isError, isSuccess, navigate, dispatch]);
 
 	const submitHandler = (e) => {
 		e.preventDefault();

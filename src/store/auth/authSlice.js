@@ -3,14 +3,16 @@ import authService from './authService';
 
 // get user from localStorage
 
-const user = JSON.parse(localStorage.getItem('user'));
+const user = JSON.parse(localStorage.getItem('userToken'))
+	? localStorage.getItem('userToken')
+	: null;
 
 const initialState = {
-	user: user ? user : null,
+	user: null,
 	isLoading: false,
-	isError: false,
+	isError: null,
 	isSuccess: false,
-	message: '',
+	userToken: null,
 };
 
 // Register user
@@ -52,15 +54,16 @@ const authSlice = createSlice({
 	reducers: {
 		reset: (state) => {
 			state.isLoading = false;
-			state.isError = false;
+			state.userToken = null;
+			state.isError = null;
 			state.isSuccess = false;
-			state.message = '';
 		},
 	},
 	extraReducers: (builder) => {
 		builder
 			.addCase(register.pending, (state) => {
 				state.isLoading = true;
+				state.isError = null
 			})
 			.addCase(register.fulfilled, (state, action) => {
 				state.isLoading = false;
@@ -70,22 +73,20 @@ const authSlice = createSlice({
 			.addCase(register.rejected, (state, action) => {
 				state.isLoading = false;
 				state.isError = true;
-				state.message = action.payload;
-				state.user = null;
+				state.user = action.payload;
 			})
 			.addCase(login.pending, (state) => {
 				state.isLoading = true;
+				state.isError = null
 			})
 			.addCase(login.fulfilled, (state, action) => {
 				state.isLoading = false;
 				state.isSuccess = true;
-				state.user = action.payload;
+				state.user = action.payload.user;
 			})
 			.addCase(login.rejected, (state, action) => {
 				state.isLoading = false;
-				state.isError = true;
-				state.message = action.payload;
-				state.user = null;
+				state.isError = action.payload;
 			})
 			.addCase(logout.fulfilled, (state) => {
 				state.user = null;

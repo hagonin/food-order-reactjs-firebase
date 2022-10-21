@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import bg from '../assets/images/bg-signup.jpg';
 import Title from '../components/Title/Title';
 import CommonSection from '../components/UI/common-section/CommonSection';
 import {
@@ -15,7 +14,7 @@ import {
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { authActions, register } from '../store/auth/authSlice';
-import Spinner from '../components/Spinner/Spinner';
+
 
 const Register = () => {
 	const [formData, setFormData] = useState({
@@ -29,7 +28,7 @@ const Register = () => {
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
 
-	const { user, isLoading, isError, isSuccess, message } = useSelector(
+	const { user, isError, isSuccess} = useSelector(
 		(state) => state.auth
 	);
 
@@ -42,7 +41,7 @@ const Register = () => {
 
 			dispatch(authActions.reset());
 		}
-	}, [user, isError, isSuccess, message, navigate, dispatch]);
+	}, [user, isError, isSuccess,navigate, dispatch]);
 
 	const handleChange = (e) => {
 		setFormData((prevState) => ({
@@ -51,11 +50,12 @@ const Register = () => {
 		}));
 	};
 
-	const handleSubmit = (e) => {
-		e.preventDefault();
-
+	const handleSubmit = (userData) => {
+		userData.preventDefault();
+// 
 		if (password !== confirmPassword) {
-			console.log('Passwords do not match');
+			alert('Passwords do not match');
+			return;
 		} else {
 			const userData = {
 				username,
@@ -63,14 +63,10 @@ const Register = () => {
 				password,
 				confirmPassword,
 			};
+			console.log('register successfully', userData);
 			dispatch(register(userData));
 		}
 	};
-
-	if (isLoading) {
-		return <Spinner />;
-	}
-
 	return (
 		<Title title="Signup">
 			<CommonSection title="Register Your Account" />
@@ -78,7 +74,7 @@ const Register = () => {
 				<Container>
 					<Row className="d-flex align-items-center justify-content-center">
 						<Col lg="4" md="6" sx="12" className="mt-4">
-							<h3 className="text-center mb-5 fw-bold">Registration Form</h3>
+							<h3 className="text-center mb-5 fw-bold text-success">Registration Form</h3>
 							<Form onSubmit={handleSubmit}>
 								<FormGroup className="mb-2 mr-sm-2 mb-sm-0">
 									<Label for="username" className="mr-sm-2">
