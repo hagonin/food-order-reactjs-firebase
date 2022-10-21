@@ -14,7 +14,7 @@ import {
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { authActions, register } from '../store/auth/authSlice';
-
+import toast from 'react-hot-toast';
 
 const Register = () => {
 	const [formData, setFormData] = useState({
@@ -28,20 +28,9 @@ const Register = () => {
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
 
-	const { user, isError, isSuccess} = useSelector(
+	const { user, isError, isSuccess, errorMessage } = useSelector(
 		(state) => state.auth
 	);
-
-	useEffect(() => {
-		if (isError) {
-			console.log('Error please find another solution');
-		}
-		if (isSuccess || user) {
-			navigate('/home');
-
-			dispatch(authActions.reset());
-		}
-	}, [user, isError, isSuccess,navigate, dispatch]);
 
 	const handleChange = (e) => {
 		setFormData((prevState) => ({
@@ -50,9 +39,9 @@ const Register = () => {
 		}));
 	};
 
-	const handleSubmit = (userData) => {
-		userData.preventDefault();
-// 
+	const handleSubmit = (e) => {
+		e.preventDefault();
+		//
 		if (password !== confirmPassword) {
 			alert('Passwords do not match');
 			return;
@@ -67,6 +56,25 @@ const Register = () => {
 			dispatch(register(userData));
 		}
 	};
+
+	useEffect(() => {
+		return () => {
+			dispatch(authActions.reset());
+		};
+	}, []);
+
+	useEffect(() => {
+		if (isSuccess) {
+			dispatch(authActions.reset());
+			navigate('/login');
+		}
+
+		if (isError) {
+			toast.error(errorMessage);
+			dispatch(authActions.reset());
+		}
+	}, [isSuccess, isError]);
+
 	return (
 		<Title title="Signup">
 			<CommonSection title="Register Your Account" />
@@ -74,7 +82,9 @@ const Register = () => {
 				<Container>
 					<Row className="d-flex align-items-center justify-content-center">
 						<Col lg="4" md="6" sx="12" className="mt-4">
-							<h3 className="text-center mb-5 fw-bold text-success">Registration Form</h3>
+							<h3 className="text-center mb-5 fw-bold text-success">
+								Registration Form
+							</h3>
 							<Form onSubmit={handleSubmit}>
 								<FormGroup className="mb-2 mr-sm-2 mb-sm-0">
 									<Label for="username" className="mr-sm-2">
