@@ -20,6 +20,7 @@ import network from '../assets/images/social-network.jpg';
 import TestimonialSlider from '../components/UI/slider/TestimonialSlider';
 import { useDispatch, useSelector } from 'react-redux';
 import { getProducts, productActions } from '../store/products/productSlice';
+import OurSuggestion from '../components/UI/slider/OurSuggestion';
 
 export default function Home() {
 	const [category, setCategory] = useState('ALL');
@@ -29,9 +30,8 @@ export default function Home() {
 
 	useEffect(() => {
 		dispatch(getProducts());
-
 	}, []);
-	
+
 	const filteredProducts = useSelector((state) => state.products.filterProduct);
 
 	return (
@@ -187,6 +187,16 @@ export default function Home() {
 						</Col>
 					</Row>
 				</Container>
+			</section>
+			<section className="pt-0">
+				<Container className='mx-5'>
+					<Row>
+						<Col lg="12" className="text-center mb-5 ">
+							<h2 className="text-uppercase">our suggestion</h2>
+						</Col>
+					</Row>
+				</Container>
+				<OurSuggestion />
 			</section>
 			<section>
 				<Container className="mt-5">

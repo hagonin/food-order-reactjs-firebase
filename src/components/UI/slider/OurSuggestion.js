@@ -1,23 +1,33 @@
 import { useEffect, useState } from 'react';
 import Slider from 'react-slick';
 import { Col } from 'reactstrap';
+import axiosClient from '../../../api/apiAxios';
 
-import products from '../../../assets/fake-API/product';
 import '../../../globalstyles/slider.css';
 import ProductCard from '../products/ProductCard';
 
 export default function OurSuggestion() {
 	const [preferredSalad, setPreferredSalad] = useState([]);
 
-	useEffect(() => {		
-		const sliceSalad = products.slice(0, 4);
+	useEffect(() => {
+		getPreferredSalad();
+		const sliceSalad = preferredSalad.slice(0, 4);
 		setPreferredSalad(sliceSalad);
 	}, []);
 
+	const getPreferredSalad = async () => {
+		try {
+			const res = await axiosClient.get('/products');
+			setPreferredSalad(res);
+		} catch (err) {
+			console.log('Error getting prodcuts failed:', err.message);
+		}
+	};
+
 	const settings = {
 		dots: true,
-		infinite: false,
-		speed: 300,
+		infinite: true,
+		speed: 100,
 		slidesToShow: 4,
 		slidesToScroll: 4,
 		responsive: [
@@ -47,7 +57,7 @@ export default function OurSuggestion() {
 		],
 	};
 	return (
-		<Slider {...settings}>
+		<Slider {...settings}>			
 			{preferredSalad.map((item) => (
 				<Col lg="3" md="4" sm="6" xs="6" key={item.id}>
 					<ProductCard item={item} />

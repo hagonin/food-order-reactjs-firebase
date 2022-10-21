@@ -46,9 +46,9 @@ export default function Contact() {
 								src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d19223.790497420352!2d-1.1704070000000353!3d52.966885500000004!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4879c1ee58a1e87f%3A0x135f0b152028f13b!2sMcDonald&#39;s!5e0!3m2!1sen!2suk!4v1666301128354!5m2!1sen!2suk"
 								width="600"
 								height="450"
-								allowfullscreen=""
+								allowFullscreen=""
 								loading="lazy"
-								referrerpolicy="no-referrer-when-downgrade"
+								referrerPolicy="no-referrer-when-downgrade"
 								className="rounded-5"
 							/>
 						</div>
