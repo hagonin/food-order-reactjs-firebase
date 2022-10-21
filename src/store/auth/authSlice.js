@@ -1,18 +1,13 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import authService from './authService';
 
-// get user from localStorage
-
-const user = JSON.parse(localStorage.getItem('userToken'))
-	? localStorage.getItem('userToken')
-	: null;
-
 const initialState = {
-	user: null,
+	user: '',
+	email: '',
 	isLoading: false,
-	isError: null,
 	isSuccess: false,
-	userToken: null,
+	isError: false,
+	errorMessage: '',
 };
 
 // Register user
@@ -43,6 +38,24 @@ export const login = createAsyncThunk('auth/login', async (user, thunkAPI) => {
 	}
 });
 
+// Fetch user by token
+
+export const fetchUserByToken = createAsyncThunk(
+	'auth/fetchUserByToken',
+	async (token, thunkAPI) => {
+		try {
+			return await authService.fetchUserByToken(token);
+		} catch (error) {
+			const message =
+				(error.response &&
+					error.response.data &&
+					error.response.data.message) ||
+				error.message ||
+				error.toString();
+			return thunkAPI.rejectWithValue(message);
+		}
+	}
+);
 // Logout user
 export const logout = createAsyncThunk('auth/logout', async () => {
 	authService.logout();
@@ -54,8 +67,7 @@ const authSlice = createSlice({
 	reducers: {
 		reset: (state) => {
 			state.isLoading = false;
-			state.userToken = null;
-			state.isError = null;
+			state.isError = false;
 			state.isSuccess = false;
 		},
 	},
@@ -63,30 +75,46 @@ const authSlice = createSlice({
 		builder
 			.addCase(register.pending, (state) => {
 				state.isLoading = true;
-				state.isError = null
 			})
 			.addCase(register.fulfilled, (state, action) => {
+				console.log('payload register', action.payload);
 				state.isLoading = false;
 				state.isSuccess = true;
-				state.user = action.payload;
+				state.email = action.payload.email;
+				state.user = action.payload.user;
 			})
 			.addCase(register.rejected, (state, action) => {
 				state.isLoading = false;
 				state.isError = true;
-				state.user = action.payload;
+				state.errorMessage = action.payload.errorMessage;
 			})
 			.addCase(login.pending, (state) => {
 				state.isLoading = true;
-				state.isError = null
 			})
 			.addCase(login.fulfilled, (state, action) => {
+				state.email = action.payload.email;
+				state.username = action.payload.name;
 				state.isLoading = false;
 				state.isSuccess = true;
-				state.user = action.payload.user;
+				return state;
 			})
 			.addCase(login.rejected, (state, action) => {
+				console.log('payload login', action.payload);
 				state.isLoading = false;
-				state.isError = action.payload;
+				state.isError = true;
+				state.errorMessage = action.payload.message;
+			})
+			.addCase(fetchUserByToken.pending, (state) => {
+				state.isLoading = true;
+			})
+			.addCase(fetchUserByToken.fulfilled, (state, action) => {				
+				state.isLoading = false;
+				state.isSuccess = true;
+			})
+			.addCase(fetchUserByToken.rejected, (state, action) => {
+				console.log('payload fetchUserByToken', action.payload);
+				state.isLoading = false;
+				state.isError = true;
 			})
 			.addCase(logout.fulfilled, (state) => {
 				state.user = null;
