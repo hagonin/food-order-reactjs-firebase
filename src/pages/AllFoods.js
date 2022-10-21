@@ -1,21 +1,33 @@
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect, useState } from 'react';
 import { Container, Row, Col } from 'reactstrap';
 import ReactPaginate from 'react-paginate';
 
-import products from '../assets/fake-API/product';
-import ProductCard from '../components/UI/products/ProductCard';
 import Title from '../components/Title/Title';
 import CommonSection from '../components/UI/common-section/CommonSection';
+import ProductCard from '../components/UI/products/ProductCard';
+import { getProducts } from '../store/products/productSlice';
 
 import '../globalstyles/all-foods.css';
 import '../globalstyles/pagination.css';
-import { useState } from 'react';
 
 export default function AllFood() {
 	const [searchTerm, setSearchTerm] = useState('');
 
 	const [pageNumber, setPageNumber] = useState(0);
+		
+	const productsList = useSelector(state => state.products.products)
+	const dispatch = useDispatch();
 
-	const searchedProduct = products.filter((item) => {
+	console.log(('check food', productsList));
+
+	useEffect(() => {
+		if (productsList.length === 0) {
+			dispatch(getProducts());
+		}
+	}, []);
+	
+	const searchedProduct = productsList.filter((item) => {
 		if (searchTerm.valueOf === '') {
 			return item;
 		}
@@ -39,7 +51,7 @@ export default function AllFood() {
 		setPageNumber(selected);
 	};
 	return (
-		<Title title="All-Food">
+		<Title title="All Food">
 			<CommonSection title="All Foods" />
 			<section  className='mb-5'>
 				<Container>

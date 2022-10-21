@@ -2,51 +2,41 @@ import { Container, Row, Col } from 'reactstrap';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
+import { getProductDetail, getProducts } from '../store/products/productSlice';
 
-import products from '../assets/fake-API/product';
 import Title from '../components/Title/Title';
 import CommonSection from '../components/UI/common-section/CommonSection';
 import { cartActions } from '../store/shopping-cart/cartSlice';
+import Feedback from '../components/UI/feedback/Feedback';
 import ProductCard from '../components/UI/products/ProductCard';
 import { CartQuantity } from '../components/UI/cart/CartQuantity';
 
 import '../globalstyles/product-detail.css';
 
-const feedbackUser = [
-	{
-		username: 'Johnathan',
-		userMail: 'johnbt@gmail.com',
-		feedback: ' The food is delicious and hot! I recommended this website',
-	},
-	{
-		username: 'Lola',
-		userMail: 'Linheyda.ted@gmail.com',
-		feedback: ' The food is delicious and hot! I recommended this website',
-	},
-	{
-		username: 'Michelle Robert',
-		userMail: 'mb.todey@outlook.com',
-		feedback: ' The food is delicious and hot! I recommended this website',
-	},
-];
-
 export default function FoodDetail() {
 	const [tab, setTab] = useState('desc');
-	const [enteredName, setEnteredName] = useState('');
-	const [enteredEmail, setEnteredEmail] = useState('');
-	const [reviewMsg, setReviewMsg] = useState('');
 
 	const { id } = useParams();
 	const dispatch = useDispatch();
 
-	const product = products.find((product) => product.id === id);
+	const products = useSelector((state) => state.products.products);
+
+	const product = useSelector((state) => state.products.selectedProduct);
+
+	useEffect(() => {
+		if (products.length === 0) {
+			dispatch(getProducts());
+		}
+		dispatch(getProductDetail(id));
+	}, []);
+
 	const [previewImg, setPreviewImg] = useState(product.image01);
 
-	const { title, price, category, desc, image01} = product;
+	const { title, price, category, desc, image01 } = product;
 
 	const relatedProduct = products.filter((item) => category === item.category);
 
-	const totalQuantity = useSelector((state) => state.cart.totalQuantity);
+	let [quantity, setQuantity] = useState(1);
 
 	const addItem = () => {
 		dispatch(
@@ -55,18 +45,19 @@ export default function FoodDetail() {
 				title,
 				price,
 				image01,
+				quantity,
 			})
 		);
 	};
-
-	const decreaseItem = () => {
-		dispatch(cartActions.removeItem(id));
+	const increaseItem = () => {
+		setQuantity(++quantity);
 	};
-
-	const submitHandler = (e) => {
-		e.preventDefault();
-
-		console.log(enteredName, enteredEmail, reviewMsg);
+	const decreaseItem = () => {
+		if (quantity > 1) {
+			setQuantity(--quantity);
+		} else {
+			setQuantity(0);
+		}
 	};
 
 	useEffect(() => {
@@ -124,8 +115,8 @@ export default function FoodDetail() {
 								</p>
 								<div className="d-flex gap-2">
 									<CartQuantity
-										incrementItem={addItem}
-										quantity={totalQuantity}
+										incrementItem={increaseItem}
+										quantity={quantity}
 										decreaseItem={decreaseItem}
 									/>
 									<button onClick={addItem} className="addToCart__btn">
@@ -156,51 +147,7 @@ export default function FoodDetail() {
 									<p>{desc}</p>
 								</div>
 							) : (
-								<div className="tab__form mb-3">
-									{feedbackUser.map((item) => (
-										<div className="review pt-3">
-											<p className="user__name mb-0">{item.username}</p>
-											<p className="user__email">{item.userMail}</p>
-											<p className="feedback__text fst-italic">
-												{item.feedback}
-											</p>
-										</div>
-									))}
-
-									<form className="form" onSubmit={submitHandler}>
-										<div className="form__group">
-											<input
-												type="text"
-												placeholder="Enter your name"
-												onChange={(e) => setEnteredName(e.target.value)}
-												required
-											/>
-										</div>
-
-										<div className="form__group">
-											<input
-												type="text"
-												placeholder="Enter your email"
-												onChange={(e) => setEnteredEmail(e.target.value)}
-												required
-											/>
-										</div>
-
-										<div className="form__group">
-											<textarea
-												rows={5}
-												type="text"
-												placeholder="Write your review"
-												onChange={(e) => setReviewMsg(e.target.value)}
-												required
-											/>
-										</div>
-
-										<button type="submit" className="addToCart__btn">
-											Submit
-										</button>
-									</form>
-								</div>
+								<Feedback />
 							)}
 						</Col>
 

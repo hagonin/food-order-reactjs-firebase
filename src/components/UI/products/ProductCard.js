@@ -15,6 +15,7 @@ export default function ProductCard(props) {
 				title,
 				image01,
 				price,
+				quantity:1
 			})
 		);
 	};
@@ -26,8 +27,8 @@ export default function ProductCard(props) {
 					<Link to={`/foods/${id}`}>{title}</Link>
 				</CardTitle>
 				<CardText>
-					Some quick example text to build on the card title and make up the
-					bulk of the card‘s content.
+					The art of modifying, processing, arranging, or decorating food to
+					enhance its aesthetic appeal.
 				</CardText>
 				<div className="d-flex align-items-center justify-content-between">
 					<span className="product__price">£{price}.00</span>

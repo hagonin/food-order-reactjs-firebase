@@ -5,16 +5,12 @@ import { Container, Row, Col, ListGroupItem, ListGroup } from 'reactstrap';
 
 import Title from '../components/Title/Title';
 import imgHero from '../assets/images/hero.jpg';
+import Feature from '../components/UI/feature/feature';
 import HowItWorks from '../components/UI/how-it-works/HowItWorks';
 
 import '../globalstyles/hero-section.css';
 import '../globalstyles/home.css';
 
-import featureImg1 from '../assets/images/freshveg.png';
-import featureImg2 from '../assets/images/best-recipe.png';
-import featureImg3 from '../assets/images/vegan.png';
-
-import products from '../assets/fake-API/product';
 import ProductCard from '../components/UI/products/ProductCard';
 import foodCategoryImg01 from '../assets/images/salad.png';
 import foodCategoryImg02 from '../assets/images/meat.png';
@@ -24,11 +20,30 @@ import quality from '../assets/images/quality-food.jpg';
 import network from '../assets/images/social-network.jpg';
 import TestimonialSlider from '../components/UI/slider/TestimonialSlider';
 
+const featureData = [
+	{
+		title: 'Fresh Ingredients',
+		imgUrl: featureImg1,
+		desc: 'Sed egestas, ante vulputa eros pede vitae luctus metus augue.',
+	},
+
+	{
+		title: 'Best recipe',
+		imgUrl: featureImg2,
+		desc: 'Sed egestas, ante vulputa eros pede vitae luctus metus augue.',
+	},
+	{
+		title: 'Vegan Menu',
+		imgUrl: featureImg3,
+		desc: 'Sed egestas, ante vulputa eros pede vitae luctus metus augue.',
+	},
+];
+
 export default function Home() {
 	const [category, setCategory] = useState('ALL');
-	const [allProducts, setAllProducts] = useState(products);
 
-	const [preferredSalad, setPreferredSalad] = useState([]);
+	const allProducts = useSelector((state) => state.products.products);
+	const dispatch = useDispatch();
 
 	const featureData = () => {
 		axios
@@ -42,40 +57,11 @@ export default function Home() {
 	};
 
 	useEffect(() => {
-		const filteredSalad = products.filter((item) => item.category === 'Salad');
-		const sliceSalad = filteredSalad.slice(0, 4);
-		setPreferredSalad(sliceSalad);
+		dispatch(getProducts());
+
 	}, []);
-
-	useEffect(() => {
-		if (category === 'ALL') {
-			setAllProducts(products);
-		}
-
-		if (category === 'SALAD') {
-			const filteredProducts = products.filter(
-				(item) => item.category === 'Salad'
-			);
-
-			setAllProducts(filteredProducts);
-		}
-
-		if (category === 'MEAT') {
-			const filteredProducts = products.filter(
-				(item) => item.category === 'Meat'
-			);
-
-			setAllProducts(filteredProducts);
-		}
-
-		if (category === 'PASTA') {
-			const filteredProducts = products.filter(
-				(item) => item.category === 'Pasta'
-			);
-
-			setAllProducts(filteredProducts);
-		}
-	}, [category]);
+	
+	const filteredProducts = useSelector((state) => state.products.filterProduct);
 
 	return (
 		<Title title="Home">
@@ -111,40 +97,7 @@ export default function Home() {
 				<HowItWorks />
 			</section>
 			<section>
-				<Container>
-					<Row>
-						<Col lg="12" className="text-center mt-5">
-							<h5 className="feature__subtitle mb-4">What we serve</h5>
-							<h2 className="feature__title">Just sit back at home</h2>
-							<h2 className="feature__title">
-								we will <span>take care</span>
-							</h2>
-							<p className="mb-1 mt-4 feature__text">
-								Enjoy delicious, satisfying helthy meals you can make with
-								everyday ingredients - no weighing, no measuring and no counting
-								calories. We will deliver you an amazing meal of your life.
-							</p>
-							<p className="feature__text mt-3">
-								The best healthy food let you order whatever you want to eat
-								with just the click of a button. No need to dine in or even
-								drive anywhere to pick up the meal.
-							</p>
-						</Col>
-						{featureData.map((item, index) => (
-							<Col lg="4" md="6" sm="12" key={index} className="mt-5">
-								<div className="feature__item text-center">
-									<img
-										src={item.imgUrl}
-										alt="feature-img"
-										className="w-25 mb-3"
-									/>
-									<h5 className="fw-bold mb-3">{item.title}</h5>
-									<p>{item.desc}</p>
-								</div>
-							</Col>
-						))}
-					</Row>
-				</Container>
+				<Feature />
 			</section>
 			<section>
 				<Container>
@@ -158,7 +111,9 @@ export default function Home() {
 									className={`all__btn ${
 										category === 'ALL' ? 'foodBtnActive' : ''
 									}`}
-									onClick={() => setCategory('ALL')}
+									onClick={() =>
+										dispatch(productActions.filterProductCategory('ALL'))
+									}
 								>
 									All
 								</button>
@@ -166,7 +121,9 @@ export default function Home() {
 									className={`d-flex align-items-center gap-2 ${
 										category === 'SALAD' ? 'foodBtnActive' : ''
 									} `}
-									onClick={() => setCategory('SALAD')}
+									onClick={() =>
+										dispatch(productActions.filterProductCategory('SALAD'))
+									}
 								>
 									<img src={foodCategoryImg01} alt="category-img" />
 									Salad
@@ -175,7 +132,9 @@ export default function Home() {
 									className={`d-flex align-items-center gap-2 ${
 										category === 'MEAT' ? 'foodBtnActive' : ''
 									} `}
-									onClick={() => setCategory('MEAT')}
+									onClick={() =>
+										dispatch(productActions.filterProductCategory('MEAT'))
+									}
 								>
 									<img src={foodCategoryImg02} alt="category-img" />
 									Meat
@@ -184,14 +143,16 @@ export default function Home() {
 									className={`d-flex align-items-center gap-2 ${
 										category === 'PASTA' ? 'foodBtnActive' : ''
 									} `}
-									onClick={() => setCategory('PASTA')}
+									onClick={() =>
+										dispatch(productActions.filterProductCategory('PASTA'))
+									}
 								>
 									<img src={foodCategoryImg03} alt="category-img" />
 									Pasta
 								</button>
 							</div>
 						</Col>
-						{allProducts.map((item) => (
+						{filteredProducts.map((item) => (
 							<Col lg="3" md="4" xs="6" key={item.id} className="mt-5">
 								<ProductCard item={item} />
 							</Col>
@@ -256,21 +217,6 @@ export default function Home() {
 					</Row>
 				</Container>
 			</section>
-			<section className="py-5">
-				<Container>
-					<Row>
-						<Col lg="12" className="text-center mb-5 ">
-							<h2 className="text-uppercase">our suggestion</h2>
-						</Col>
-
-						{preferredSalad.map((item) => (
-							<Col lg="3" md="4" sm="6" xs="6" key={item.id}>
-								<ProductCard item={item} />
-							</Col>
-						))}
-					</Row>
-				</Container>
-			</section>
 			<section>
 				<Container className="mt-5">
 					<Row>
@@ -291,11 +237,7 @@ export default function Home() {
 						</Col>
 
 						<Col lg="6" md="6">
-							<img
-								src={network}
-								alt="testimonial-img"
-								className="testimonial__img"
-							/>
+							<img src={network} alt="testimonial-img" className="testimonial__img" />
 						</Col>
 					</Row>
 				</Container>

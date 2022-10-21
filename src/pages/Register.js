@@ -1,15 +1,24 @@
 import { useEffect, useState } from 'react';
 import Title from '../components/Title/Title';
 import CommonSection from '../components/UI/common-section/CommonSection';
-import { Container, Row, Col } from 'reactstrap';
+import {
+	Container,
+	Row,
+	Col,
+	Button,
+	Form,
+	FormGroup,
+	Label,
+	Input,
+} from 'reactstrap';
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { authActions, register } from '../store/auth/authSlice';
-import Spinner from '../components/Spinner/Spinner';
+
 
 const Register = () => {
 	const [formData, setFormData] = useState({
-		username:'',
+		username: '',
 		email: '',
 		password: '',
 		confirmPassword: '',
@@ -19,20 +28,20 @@ const Register = () => {
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
 
-	const { user, isLoading, isError, isSuccess, message } = useSelector(
+	const { user, isError, isSuccess} = useSelector(
 		(state) => state.auth
 	);
 
 	useEffect(() => {
 		if (isError) {
-			console.log('Error please find anothe solution');
+			console.log('Error please find another solution');
 		}
 		if (isSuccess || user) {
 			navigate('/home');
 
 			dispatch(authActions.reset());
 		}
-	}, [user, isError, isSuccess, message, navigate, dispatch]);
+	}, [user, isError, isSuccess,navigate, dispatch]);
 
 	const handleChange = (e) => {
 		setFormData((prevState) => ({
@@ -41,11 +50,12 @@ const Register = () => {
 		}));
 	};
 
-	const handleSubmit = (e) => {
-		e.preventDefault();
-
+	const handleSubmit = (userData) => {
+		userData.preventDefault();
+// 
 		if (password !== confirmPassword) {
-			console.log('Passwords do not match');
+			alert('Passwords do not match');
+			return;
 		} else {
 			const userData = {
 				username,
@@ -53,68 +63,99 @@ const Register = () => {
 				password,
 				confirmPassword,
 			};
+			console.log('register successfully', userData);
 			dispatch(register(userData));
 		}
 	};
-
-	if (isLoading) {
-		return <Spinner />;
-	}
-
 	return (
 		<Title title="Signup">
 			<CommonSection title="Register Your Account" />
 			<section className="my-3">
 				<Container>
-					<Row>
-						<Col lg="10" md="6" sm="12" className="m-auto text-center">
-							<h5 className="text-center">Please create an account</h5>
-							<form className="form mb-5" onSubmit={handleSubmit}>
-								<div className="form__group">
-									<input
-										type="text"
-										placeholder="Username"
-										required
+					<Row className="d-flex align-items-center justify-content-center">
+						<Col lg="4" md="6" sx="12" className="mt-4">
+							<h3 className="text-center mb-5 fw-bold text-success">Registration Form</h3>
+							<Form onSubmit={handleSubmit}>
+								<FormGroup className="mb-2 mr-sm-2 mb-sm-0">
+									<Label for="username" className="mr-sm-2">
+										Your Username
+									</Label>
+									<Input
+										type="username"
 										name="username"
+										id="username"
 										value={username}
 										onChange={handleChange}
 									/>
-								</div>
-								<div className="form__group">
-									<input
+								</FormGroup>
+								<FormGroup className="mb-2 mr-sm-2 mb-sm-0">
+									<Label for="email" className="mr-sm-2">
+										Your Email
+									</Label>
+									<Input
 										type="email"
-										placeholder="Email"
-										required
 										name="email"
+										id="email"
 										value={email}
 										onChange={handleChange}
 									/>
-								</div>
-								<div className="form__group">
-									<input
+								</FormGroup>
+								<FormGroup className="mb-2 mr-sm-2 mb-sm-0">
+									<Label for="password" className="mr-sm-2">
+										Your Password
+									</Label>
+									<Input
 										type="password"
-										placeholder="Password"
-										required
 										name="password"
+										id="password"
 										value={password}
 										onChange={handleChange}
 									/>
-								</div>
-								<div className="form__group">
-									<input
+								</FormGroup>
+
+								<FormGroup className="mb-2 mr-sm-2 mb-sm-0">
+									<Label for="confirmPassword" className="mr-sm-2">
+										Confirm Password
+									</Label>
+									<Input
 										type="password"
-										placeholder="Confirm Password"
-										required
 										name="confirmPassword"
+										id="confirmPassword"
 										value={confirmPassword}
 										onChange={handleChange}
 									/>
-								</div>
-								<button type="submit" className="addToCart__btn">
+								</FormGroup>
+								<FormGroup check className="d-flex mt-5 flex-column gap-2">
+									<Label check>
+										<Input type="checkbox" />I consent to Herboil processing my
+										personal data in order to send personalized marketing
+										material in accordance with the consent form and the privacy
+										policy.
+									</Label>
+									<Label check>
+										<Input type="checkbox" />
+										By clicking "create account", I consent to the privacy
+										policy.
+									</Label>
+								</FormGroup>
+								<Button
+									color="success"
+									size="lg"
+									block
+									className=" text-uppercase mt-4"
+								>
 									Sign Up
-								</button>
-							</form>
-							<Link to="/login">Already have an account? Login</Link>
+								</Button>
+								<div className="d-flex flex-column align-items-center mb-5">
+									<div className="my-4">
+										<p>By creating an account, you agree to our:</p>
+										<p>TERMS OF CONDITIONS | PRIVACY POLICY</p>
+									</div>
+									<Link to="/login" className="text-decoration-underline">
+										Already have an account? Login
+									</Link>
+								</div>
+							</Form>
 						</Col>
 					</Row>
 				</Container>

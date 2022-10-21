@@ -5,20 +5,17 @@ import { cartActions } from '../../../store/shopping-cart/cartSlice';
 
 import '../../../globalstyles/cart-item.css';
 
+
 export default function CartItem({ item }) {
-	const { id, title, price, image01, quantity, totalPrice } = item;
+	const { id, title, image01, quantity, totalPrice } = item;
 
 	const dispatch = useDispatch();
-
+	
 	const incrementItem = () => {
 		dispatch(
-			cartActions.addItem({
-				id,
-				title,
-				price,
-				image01,
-			})
+			cartActions.increaseQuantity(id)
 		);
+		console.log('check quantity', quantity);
 	};
 
 	const decreaseItem = () => {
@@ -40,8 +37,11 @@ export default function CartItem({ item }) {
 						<p className=" d-flex align-items-center gap-4 cart__product-price">
 							{quantity} x<span>£{totalPrice}.00</span>
 						</p>
-						<CartQuantity incrementItem={incrementItem} quantity={quantity} decreaseItem={decreaseItem}  />
-						
+						<CartQuantity
+							incrementItem={incrementItem}
+							quantity={quantity}
+							decreaseItem={decreaseItem}
+						/>
 					</div>
 
 					<span className="delete__btn" onClick={deleteItem}>

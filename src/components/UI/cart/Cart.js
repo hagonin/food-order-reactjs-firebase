@@ -9,6 +9,7 @@ import '../../../globalstyles/shopping-cart.css';
 export default function Cart() {
 	const dispatch = useDispatch();
 	const cartProducts = useSelector((state) => state.cart.cartItems);
+	console.log('card product', cartProducts);
 	const totalAmount = useSelector((state) => state.cart.totalAmount);
 
 	const toggleCart = () => {
@@ -47,3 +48,4 @@ export default function Cart() {
 		</div>
 	);
 }
+

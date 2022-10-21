@@ -22,11 +22,11 @@ export default function Footer() {
 						<h5 className="footer__title">Delivery Time</h5>
 						<ListGroup className="delivery__time-list">
 							<ListGroupItem className="delivery__time-item border-0 ps-0">
-								<span>Monday - Friday</span>
+								<span>Monday - Saturday</span>
 								<p>10:00am - 11:00pm</p>
 							</ListGroupItem>
 							<ListGroupItem className="delivery__time-item border-0 ps-0">
-								<span>Saturday - Sunday</span>
+								<span>Sunday</span>
 								<p>Off day</p>
 							</ListGroupItem>
 						</ListGroup>
@@ -35,13 +35,13 @@ export default function Footer() {
 						<h5 className="footer__title">Contact</h5>
 						<ListGroup className="delivery__time-list">
 							<ListGroupItem className="delivery__time-item border-0 ps-0">
-								<p>Location: 23b Elizabeth road, GR3 2F3, UK</p>
+								<p>Location: 32 Victoria Avenue, Nottingham, NG23 1GL</p>
 							</ListGroupItem>
 							<ListGroupItem className="delivery__time-item border-0 ps-0">
 								<p>Phone: 07 32 12 45 943</p>
 							</ListGroupItem>
 							<ListGroupItem className="delivery__time-item border-0 ps-0">
-								<p>Email: healthyfooduk@gmail.com</p>
+								<p>Email: info@healthyfood.com</p>
 							</ListGroupItem>
 						</ListGroup>
 					</Col>

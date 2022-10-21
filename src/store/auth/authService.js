@@ -1,22 +1,17 @@
-import axios from 'axios';
+import axiosClient from '../../api/apiAxios';
 
 // Register user
 const register = async (userData) => {
-	const response = await axios.post(
-		'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyDI3asXL7nJIx1Aio1Y_dgOfj-Xpw3zXJY',
-		userData
-	);
+	const response = await axiosClient.post('/users', userData);
 	if (response.data) {
+		console.log('check authen ', response.data)
 		localStorage.setItem('user', JSON.stringify(response.data));
 	}
 	return response.data;
 };
 // Login user
 const login = async (email, password) => {
-	const response = await axios.get(
-		'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyDI3asXL7nJIx1Aio1Y_dgOfj-Xpw3zXJY',
-		{ email, password }
-	);
+	const response = await axiosClient.get('users', { email, password });
 	if (response.data) {
 		localStorage.setItem('user', JSON.stringify(response.data));
 	}
@@ -29,9 +24,14 @@ const login = async (email, password) => {
 const logout = () => {
 	localStorage.removeItem('user');
 };
+
+const getCurrentUser = () => {
+	return JSON.parse(localStorage.getItem('user'));
+}
 const authService = {
 	register,
 	login,
 	logout,
+	getCurrentUser,
 };
 export default authService;
