@@ -1,10 +1,9 @@
 import { useEffect, useRef } from 'react';
-import bg from '../assets/images/super-dinner.png'
+import bg from '../assets/images/super-dinner.png';
 import {
 	Container,
 	Row,
 	Col,
-	CustomInput,
 	FormGroup,
 	Label,
 	Input,
@@ -13,11 +12,11 @@ import {
 } from 'reactstrap';
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
+import toast from 'react-hot-toast';
 
 import Title from '../components/Title/Title';
 import CommonSection from '../components/UI/common-section/CommonSection';
 import { authActions, login } from '../store/auth/authSlice';
-import Spinner from '../components/Spinner/Spinner';
 
 const Login = () => {
 	const loginMailRef = useRef();
@@ -26,21 +25,9 @@ const Login = () => {
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
 
-	const { user, isLoading, isError, isSuccess } = useSelector(
+	const { isSuccess, isError, errorMessage } = useSelector(
 		(state) => state.auth
 	);
-
-	useEffect(() => {
-		if (isError) {
-			console.log('Error, try to find the solution!');
-		}
-
-		if (isSuccess || user) {
-			navigate('/home');
-		}
-
-		dispatch(authActions.reset());
-	}, [user, isError, isSuccess, navigate, dispatch]);
 
 	const submitHandler = (e) => {
 		e.preventDefault();
@@ -51,11 +38,26 @@ const Login = () => {
 		};
 
 		dispatch(login(userData));
+		alert('Login successfully!');
+		navigate('/home');
 	};
+	useEffect(() => {
+		return () => {
+			dispatch(authActions.reset());
+		};
+	}, []);
 
-	if (isLoading) {
-		return <Spinner />;
-	}
+	useEffect(() => {
+		if (isError) {
+			toast.error(errorMessage);
+			dispatch(authActions.reset());
+		}
+
+		if (isSuccess) {
+			dispatch(authActions.reset());
+			navigate('/home');
+		}
+	}, [isError, isSuccess]);
 
 	return (
 		<Title title="Login">
@@ -118,14 +120,16 @@ const Login = () => {
 						</Col>
 
 						<Col lg="6" md="6" sm="12" className="text-center">
-							<img src={bg} alt="bg" className='w-50' />
+							<img src={bg} alt="bg" className="w-50" />
 							<h5>Don't have an account ?</h5>
 							<p className="m-auto ">
 								Add items to your wishlistget personalised recommendations check
 								out more quickly track your orders register
 							</p>
-							<Button color='success' className="mt-4 py-2 text-uppercase">
-								<Link to="/register" className='text-light'>Create account</Link>
+							<Button color="success" className="mt-4 py-2 text-uppercase">
+								<Link to="/register" className="text-light">
+									Create account
+								</Link>
 							</Button>
 						</Col>
 					</Row>
