@@ -1,32 +1,32 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { Container, Row, Col } from 'reactstrap';
 import ReactPaginate from 'react-paginate';
 
 import Title from '../components/Title/Title';
-import CommonSection from '../components/UI/common-section/CommonSection';
-import ProductCard from '../components/UI/products/ProductCard';
+import CommonSection from '../containers/common-section/CommonSection';
+import ProductCard from '../containers/products/ProductCard';
 import { getProducts } from '../store/products/productSlice';
 
 import '../globalstyles/all-foods.css';
 import '../globalstyles/pagination.css';
 
+const PRODUCT_PER_PAGE = 12;
+
 export default function AllFood() {
 	const [searchTerm, setSearchTerm] = useState('');
 
 	const [pageNumber, setPageNumber] = useState(0);
-		
-	const productsList = useSelector(state => state.products.products)
-	const dispatch = useDispatch();
 
-	console.log(('check food', productsList));
+	const productsList = useSelector((state) => state.products.products);
+	const dispatch = useDispatch();
 
 	useEffect(() => {
 		if (productsList.length === 0) {
 			dispatch(getProducts());
 		}
 	}, []);
-	
+
 	const searchedProduct = productsList.filter((item) => {
 		if (searchTerm.valueOf === '') {
 			return item;
@@ -38,22 +38,24 @@ export default function AllFood() {
 		}
 	});
 
-	const productPerPage = 12;
-	const visitedPage = pageNumber * productPerPage;
-	const displayPage = searchedProduct.slice(
-		visitedPage,
-		visitedPage + productPerPage
-	);
+	const currentTableData = useMemo(() => {
+		const visitedPage = pageNumber * PRODUCT_PER_PAGE;
+		const displayPage = searchedProduct.slice(
+			visitedPage,
+			visitedPage + PRODUCT_PER_PAGE
+		);
 
-	const pageCount = Math.ceil(searchedProduct.length / productPerPage);
+		const pageCount = Math.ceil(searchedProduct.length / PRODUCT_PER_PAGE);
+	}, [searchedProduct]);
 
 	const changePage = ({ selected }) => {
 		setPageNumber(selected);
 	};
+
 	return (
 		<Title title="All Food">
 			<CommonSection title="All Foods" />
-			<section  className='mb-5'>
+			<section className="mb-5">
 				<Container>
 					<Row>
 						<Col lg="6" md="6" sm="6" xs="12">
@@ -87,7 +89,7 @@ export default function AllFood() {
 						))}
 						<div>
 							<ReactPaginate
-								pageCount={pageCount}
+								pageCount={currentTableData}
 								onPageChange={changePage}
 								previousLabel={'Prev'}
 								nextLabel={'Next'}

@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Col, Container, Row } from 'reactstrap';
-import axiosClient from '../../../api/apiAxios';
+import axiosClient from '../../api/apiAxios';
 
 export default function Feature() {
 	const [loadedFeature, setLoadedFeature] = useState([]);

@@ -15,7 +15,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import toast from 'react-hot-toast';
 
 import Title from '../components/Title/Title';
-import CommonSection from '../components/UI/common-section/CommonSection';
+import CommonSection from '../containers/common-section/CommonSection';
 import { authActions, login } from '../store/auth/authSlice';
 
 const Login = () => {

@@ -1,11 +1,13 @@
 import { useSelector } from 'react-redux';
 import { Container, Row, Col } from 'reactstrap';
-import CommonSection from '../components/UI/common-section/CommonSection';
+import CommonSection from '../containers/common-section/CommonSection';
 import Title from '../components/Title/Title';
 
 import '../globalstyles/checkout.css';
 import { useState } from 'react';
 
+
+const SHIPPING_COST = 5;
 const Checkout = () => {
 	const [enterName, setEnterName] = useState('');
 	const [enterEmail, setEnterEmail] = useState('');
@@ -16,9 +18,8 @@ const Checkout = () => {
 
 	const shippingInfo = [];
 	const cartTotalAmount = useSelector((state) => state.cart.totalAmount);
-	const shippingCost = 5;
 
-	const totalAmount = cartTotalAmount + Number(shippingCost);
+	const totalAmount = cartTotalAmount + Number(SHIPPING_COST);
 
 	const submitHandler = (e) => {
 		e.preventDefault();
@@ -38,7 +39,7 @@ const Checkout = () => {
 	return (
 		<Title title="Checkout">
 			<CommonSection title="Checkout" />
-			<section className='my-5'>
+			<section className="my-5">
 				<Container>
 					<Row>
 						<Col lg="8" md="6">
@@ -105,7 +106,7 @@ const Checkout = () => {
 									Subtotal: <span>£{cartTotalAmount}.00</span>
 								</h6>
 								<h6 className="d-flex align-items-center justify-content-between mb-3">
-									Shipping: <span>£{shippingCost}.00</span>
+									Shipping: <span>£{SHIPPING_COST}.00</span>
 								</h6>
 								<div className="checkout__total">
 									<h5 className="d-flex align-items-center justify-content-between">

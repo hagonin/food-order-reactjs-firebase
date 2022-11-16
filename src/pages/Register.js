@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import Title from '../components/Title/Title';
-import CommonSection from '../components/UI/common-section/CommonSection';
+import CommonSection from '../containers/common-section/CommonSection';
 import {
 	Container,
 	Row,
@@ -28,7 +28,7 @@ const Register = () => {
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
 
-	const { user, isError, isSuccess, errorMessage } = useSelector(
+	const {isError, isSuccess, errorMessage } = useSelector(
 		(state) => state.auth
 	);
 

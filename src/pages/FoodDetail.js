@@ -5,11 +5,11 @@ import { useEffect, useState } from 'react';
 import { getProductDetail, getProducts } from '../store/products/productSlice';
 
 import Title from '../components/Title/Title';
-import CommonSection from '../components/UI/common-section/CommonSection';
+import CommonSection from '../containers/common-section/CommonSection';
 import { cartActions } from '../store/shopping-cart/cartSlice';
-import Feedback from '../components/UI/feedback/Feedback';
-import ProductCard from '../components/UI/products/ProductCard';
-import { CartQuantity } from '../components/UI/cart/CartQuantity';
+import Feedback from '../containers/feedback/Feedback';
+import ProductCard from '../containers/products/ProductCard';
+import { CartQuantity } from '../containers/cart/CartQuantity';
 
 import '../globalstyles/product-detail.css';
 

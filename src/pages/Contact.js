@@ -10,7 +10,7 @@ import {
 	Row,
 } from 'reactstrap';
 import Title from '../components/Title/Title';
-import CommonSection from '../components/UI/common-section/CommonSection';
+import CommonSection from '../containers/common-section/CommonSection';
 
 export default function Contact() {
 	return (

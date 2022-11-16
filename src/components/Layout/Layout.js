@@ -2,7 +2,7 @@ import { useSelector } from 'react-redux';
 
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
-import Carts from '../UI/cart/Cart'
+import Carts from '../../containers/cart/Cart'
 
 import '../../globalstyles/main.css';
 

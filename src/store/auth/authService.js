@@ -2,12 +2,13 @@ import axiosClient from '../../api/apiAxios';
 
 // Register user
 const register = async (userData) => {
+	console.log('register function', userData);
 	const response = await axiosClient.post('/users', userData);
-	if (response.status === 200) {
+	if (response.status === 201) {
 		localStorage.setItem('token', response.data.token);
 		return { ...response, userData };
-	} 
-	return response.data 
+	}
+	return response.data;
 };
 // Login user
 const login = async (email, password) => {
@@ -19,14 +20,14 @@ const login = async (email, password) => {
 	return response.data;
 };
 
-// Feth user by token 
-const fetchUserByToken = async({token}) => {
-	const response = await axiosClient.get('/users', {token})
+// Feth user by token
+const fetchUserByToken = async ({ token }) => {
+	const response = await axiosClient.get('/users', { token });
 	if (response.status === 200) {
-		return { ...response}
+		return { ...response };
 	}
-	return response.data
-}
+	return response.data;
+};
 // logout user
 
 const logout = () => {

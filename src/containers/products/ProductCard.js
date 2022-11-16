@@ -1,8 +1,8 @@
 import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Card, CardBody, CardText, CardTitle } from 'reactstrap';
-import '../../../globalstyles/product-card.css';
-import { cartActions } from '../../../store/shopping-cart/cartSlice';
+import '../../globalstyles/product-card.css';
+import { cartActions } from '../../store/shopping-cart/cartSlice';
 
 export default function ProductCard(props) {
 	const { id, title, price, image01 } = props.item;
@@ -15,7 +15,7 @@ export default function ProductCard(props) {
 				title,
 				image01,
 				price,
-				quantity:1
+				quantity: 1,
 			})
 		);
 	};

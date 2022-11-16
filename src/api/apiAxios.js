@@ -6,7 +6,7 @@ const baseURL = 'http://localhost:3002';
 const axiosClient = axios.create({
 	baseURL: baseURL,
 	headers: {
-		'content-type': 'application/json',
+		'Content-Type': 'application/json',
 	},
 	// paramsSerializer: (params) => queryString.stringify(params),
 });

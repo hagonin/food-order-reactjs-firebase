@@ -4,11 +4,19 @@
       "id": 1,
       "email": "admin@gmail.com",
       "password": "letmein",
-      "firstname": "",
-      "lastname": ""
+      "username": ""
     },
     {
+      "username": "sarah",
+      "email": "admin@gmail.com",
+      "password": "123123",
       "id": 2
+    },
+    {
+      "username": "sarah",
+      "email": "goninha@outlook.fr",
+      "password": "123",
+      "id": 3
     }
   ],
   "carts": [

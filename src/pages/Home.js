@@ -4,29 +4,28 @@ import { Container, Row, Col, ListGroupItem, ListGroup } from 'reactstrap';
 
 import Title from '../components/Title/Title';
 import imgHero from '../assets/images/hero.jpg';
-import Feature from '../components/UI/feature/feature';
-import HowItWorks from '../components/UI/how-it-works/HowItWorks';
-import OurSuggestion from '../components/UI/slider/OurSuggestion'
+import Feature from '../containers/feature/feature';
+import HowItWorks from '../containers/how-it-works/HowItWorks';
 
 import '../globalstyles/hero-section.css';
 import '../globalstyles/home.css';
 
-import ProductCard from '../components/UI/products/ProductCard';
+import ProductCard from '../containers/products/ProductCard';
 import foodCategoryImg01 from '../assets/images/salad.png';
 import foodCategoryImg02 from '../assets/images/meat.png';
 import foodCategoryImg03 from '../assets/images/pasta.png';
 
 import quality from '../assets/images/quality-food.jpg';
 import network from '../assets/images/social-network.jpg';
-import TestimonialSlider from '../components/UI/slider/TestimonialSlider';
+import TestimonialSlider from '../containers/slider/TestimonialSlider';
 import { useDispatch, useSelector } from 'react-redux';
 import { getProducts, productActions } from '../store/products/productSlice';
-import OurSuggestion from '../components/UI/slider/OurSuggestion';
+import OurSuggestion from '../containers/slider/OurSuggestion';
 
 export default function Home() {
 	const [category, setCategory] = useState('ALL');
 
-	// const allProducts = useSelector((state) => state.products.products);
+	const allProducts = useSelector((state) => state.products.products);
 	const dispatch = useDispatch();
 
 	useEffect(() => {
@@ -46,16 +45,15 @@ export default function Home() {
 									Makes it easy and enjoyable to eat well and feel great
 								</p>
 								<h1 className="mb-4 hero__title d-flex flex-column gap-2">
-									MEALS THAT GET YOU <span>HEALTHY & FIT</span>
+									MEALS THAT GET YOU
+									<span>HEALTHY & FIT</span>
 								</h1>
 								<p>Change Your Lifestyles For The Better</p>
 								<div className="hero__btns d-flex align-items-center gap-5 mt-4">
-									<Link to="/foods">
-										<button className="order__btn">Get Started Today</button>
-									</Link>
-									<Link to="/foods">
-										<button className="all__foods-btn">See Our Menu</button>
-									</Link>
+									<button className="order__btn">Get Started Today</button>
+									<button className="all__foods-btn">
+										<Link to="/foods">See Our Menu</Link>
+									</button>
 								</div>
 							</div>
 						</Col>
@@ -177,8 +175,8 @@ export default function Home() {
 
 									<ListGroupItem className="border-0 ps-0">
 										<p className="choose__us-title d-flex align-items-center gap-2 ">
-											<i className="ri-checkbox-circle-line"></i>Athletes and
-											those who lead an active lifestyle
+											<i className="ri-checkbox-circle-line"></i>
+											Athletes and those who lead an active lifestyle
 										</p>
 										<p className="choose__us-desc">
 											Lorem ipsum dolor sit amet consectetur adipisicing elit.
@@ -192,7 +190,7 @@ export default function Home() {
 				</Container>
 			</section>
 			<section className="pt-0">
-				<Container className='mx-5'>
+				<Container className="mx-5">
 					<Row>
 						<Col lg="12" className="text-center mb-5 ">
 							<h2 className="text-uppercase">our suggestion</h2>
@@ -200,16 +198,6 @@ export default function Home() {
 					</Row>
 				</Container>
 				<OurSuggestion />
-			</section>
-			<section>
-				<Container>
-					<Row>
-						<Col lg="12" className="text-center mb-5 ">
-							<h2>Our Suggestion</h2>
-						</Col>
-						<OurSuggestion/>
-					</Row>
-				</Container>
 			</section>
 			<section>
 				<Container className="mt-5">
@@ -242,4 +230,7 @@ export default function Home() {
 			</section>
 		</Title>
 	);
+	
 }
+
+						

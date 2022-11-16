@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import Slider from 'react-slick';
-import axiosClient from '../../../api/apiAxios';
+import axiosClient from '../../api/apiAxios';
 
-import '../../../globalstyles/slider.css'
+import '../../globalstyles/slider.css';
 
 export default function TestimonialSlider() {
 	const settings = {
@@ -26,10 +26,10 @@ export default function TestimonialSlider() {
 		};
 		getReview();
 	}, []);
-	
+
 	return (
 		<Slider {...settings}>
-			{reviewClient.map((user,index) => (
+			{reviewClient.map((user, index) => (
 				<div key={user.index}>
 					<p className="review__text">{user.comment}</p>
 					<div className=" slider__content d-flex align-items-center gap-3 ">

@@ -1,5 +1,5 @@
 import { useDispatch } from 'react-redux';
-import { cartActions } from '../../../store/shopping-cart/cartSlice';
+import { cartActions } from '../../store/shopping-cart/cartSlice';
 
 export default function CartCheckOut({item}) {
  const { id, image01, title, price, quantity } = item;

@@ -1,9 +1,9 @@
 import { useDispatch } from 'react-redux';
 import { ListGroupItem } from 'reactstrap';
 import { CartQuantity } from './CartQuantity';
-import { cartActions } from '../../../store/shopping-cart/cartSlice';
+import { cartActions } from '../../store/shopping-cart/cartSlice';
 
-import '../../../globalstyles/cart-item.css';
+import '../../globalstyles/cart-item.css';
 
 
 export default function CartItem({ item }) {

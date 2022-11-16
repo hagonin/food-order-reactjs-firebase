@@ -1,9 +1,9 @@
 import { useSelector } from 'react-redux';
 import { Container, Row, Col } from 'reactstrap';
 import { Link } from 'react-router-dom';
-import CartCheckOut from '../components/UI/cart/CartCheckOut';
+import CartCheckOut from '../containers/cart/CartCheckOut';
 import Title from '../components/Title/Title';
-import CommonSection from '../components/UI/common-section/CommonSection';
+import CommonSection from '../containers/common-section/CommonSection';
 
 import '../globalstyles/cart-page.css';
 

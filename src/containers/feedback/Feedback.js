@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import axiosClient from "../../../api/apiAxios";
+import axiosClient from "../../api/apiAxios";
 
 export default function Feedback() {
 

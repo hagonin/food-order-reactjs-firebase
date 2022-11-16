@@ -1,11 +1,11 @@
 import { Container, Row, Col } from 'reactstrap';
 
-import howitworksImg1 from '../../../assets/images/mobile.png';
-import howitworksImg2 from '../../../assets/images/truck.png';
-import howitworksImg3 from '../../../assets/images/heat.png';
-import howitworksImg4 from '../../../assets/images/repeat.png';
+import howitworksImg1 from '../../assets/images/mobile.png';
+import howitworksImg2 from '../../assets/images/truck.png';
+import howitworksImg3 from '../../assets/images/heat.png';
+import howitworksImg4 from '../../assets/images/repeat.png';
 
-import '../../../globalstyles/how-it-works.css';
+import '../../globalstyles/how-it-works.css';
 
 const howItWorksData = [
 	{ display: 'Choose', imgUrl: howitworksImg1 },

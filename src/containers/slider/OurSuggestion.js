@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
 import Slider from 'react-slick';
 import { Col } from 'reactstrap';
-import axiosClient from '../../../api/apiAxios';
+import axiosClient from '../../api/apiAxios';
 
-import '../../../globalstyles/slider.css';
+import '../../globalstyles/slider.css';
 import ProductCard from '../products/ProductCard';
 
 export default function OurSuggestion() {

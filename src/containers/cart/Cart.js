@@ -2,9 +2,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { ListGroup } from 'reactstrap';
 
-import { cartUiActions } from '../../../store/shopping-cart/cartUiSlice';
+import { cartUiActions } from '../../store/shopping-cart/cartUiSlice';
 import CartItem from './CartItem';
-import '../../../globalstyles/shopping-cart.css';
+import '../../globalstyles/shopping-cart.css';
 
 export default function Cart() {
 	const dispatch = useDispatch();
